@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f0cb1cf82cc40d498fe957fc43dae44" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineShopModel.ChartOfAccount" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Child" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Childf" Width="1.5" PointX="1.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customer" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customerd" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customerdf" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customerf" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customerfm" Width="1.5" PointX="3.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Customerm" Width="1.5" PointX="3" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.FisicalYear" Width="1.5" PointX="1.5" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Month" Width="1.5" PointX="1.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Orderd" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Orderfd" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Orderfm" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Orderf" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Orderm" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Order" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Parent" Width="1.5" PointX="1.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.Parentf" Width="1.5" PointX="1.5" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopModel.RevenueCategory" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="OnlineShopModel.FK_ChartOfAccount_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderms_ChartOfAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orders_ChartOfAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Child_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customer_Child" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerd_Child" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerm_Child" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Childf_Parentf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerdf_Childf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerf_Childf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerfm_Childf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customer_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customer_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orders_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerd_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerd_Month" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerd_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderds_Customerd" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerdf_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerdf_Month" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerdf_Parentf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfds_Customerdf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerf_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerf_Parentf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfs_Customerf" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerfm_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerfm_Month" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerfm_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfms_Customerm" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerm_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerm_Month" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Customerm_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderms_Customerm" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Month_FisicalYear" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderds_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfds_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfms_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfs_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderms_RevenueCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orders_RevenueCategory" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OnlineShopModel.ChartOfAccountf" Width="1.5" PointX="3" PointY="41.5" />
+        <AssociationConnector Association="OnlineShopModel.FK_ChartOfAccountf_RevenueCategory" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfds_ChartOfAccountf" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfms_ChartOfAccountf" />
+        <AssociationConnector Association="OnlineShopModel.FK_Orderfs_ChartOfAccountf" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

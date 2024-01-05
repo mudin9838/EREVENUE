@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ApplicationRole>
+
+@{ ViewBag.Title = "Index"; }
+
+
+
+<p class="btn btn-success">
+    @Html.ActionLink("አዲስ", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            @*Add a table header for the Address info:*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.DisplayAddress)
+                </th>*@
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>*@
+    <td>
+        @Html.ActionLink("አርም", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("ዝርዝር", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("ሰርዝ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
+}
+
+</table>

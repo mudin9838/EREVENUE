@@ -1,0 +1,2231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OnlineShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChartOfAccount">
+          <Key>
+            <PropertyRef Name="ChartOfAccountId" />
+          </Key>
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChartOfAccountf">
+          <Key>
+            <PropertyRef Name="ChartOfAccountId" />
+          </Key>
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Child">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Childf">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customerd">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MonthId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customerdf">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MonthId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customerf">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customerfm">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MonthId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customerm">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MonthId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FisicalYear">
+          <Key>
+            <PropertyRef Name="FisicalYearId" />
+          </Key>
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FisicalYearName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthId" />
+          </Key>
+          <Property Name="MonthId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="150" />
+          <Property Name="FisicalYearId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Orderds">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orderfds">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orderfms">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orderfs">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orderms">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amountyplan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Parentf">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="RevenueCategory">
+          <Key>
+            <PropertyRef Name="RevenueCategoryId" />
+          </Key>
+          <Property Name="RevenueCategoryId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RevenueCategoryName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ChartOfAccount_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="0..1" />
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="ChartOfAccount">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChartOfAccountf_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="0..1" />
+          <End Role="ChartOfAccountf" Type="Self.ChartOfAccountf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="ChartOfAccountf">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Child_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Childf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="0..1" />
+          <End Role="Childf" Type="Self.Childf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Childf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Month_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="0..1" />
+          <End Role="Month" Type="Self.Month" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Month">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderds_Customerd">
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="1" />
+          <End Role="Orderds" Type="Self.Orderds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerd">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderds">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderds_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderds" Type="Self.Orderds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderds">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_ChartOfAccountf">
+          <End Role="ChartOfAccountf" Type="Self.ChartOfAccountf" Multiplicity="1" />
+          <End Role="Orderfds" Type="Self.Orderfds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderfds">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_Customerdf">
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="1" />
+          <End Role="Orderfds" Type="Self.Orderfds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerdf">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfds">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfds" Type="Self.Orderfds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfds">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_ChartOfAccountf">
+          <End Role="ChartOfAccountf" Type="Self.ChartOfAccountf" Multiplicity="1" />
+          <End Role="Orderfms" Type="Self.Orderfms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderfms">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_Customerm">
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="1" />
+          <End Role="Orderfms" Type="Self.Orderfms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerfm">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfms">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfms" Type="Self.Orderfms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfms">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_ChartOfAccountf">
+          <End Role="ChartOfAccountf" Type="Self.ChartOfAccountf" Multiplicity="1" />
+          <End Role="Orderfs" Type="Self.Orderfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderfs">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_Customerf">
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="1" />
+          <End Role="Orderfs" Type="Self.Orderfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerf">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfs" Type="Self.Orderfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfs">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_ChartOfAccount">
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccount">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_Customerm">
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerm">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ChartOfAccount">
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccount">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineShopModelStoreContainer">
+          <EntitySet Name="ChartOfAccount" EntityType="Self.ChartOfAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChartOfAccountf" EntityType="Self.ChartOfAccountf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Child" EntityType="Self.Child" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Childf" EntityType="Self.Childf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customerd" EntityType="Self.Customerd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customerdf" EntityType="Self.Customerdf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customerf" EntityType="Self.Customerf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customerfm" EntityType="Self.Customerfm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customerm" EntityType="Self.Customerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FisicalYear" EntityType="Self.FisicalYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Month" EntityType="Self.Month" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderds" EntityType="Self.Orderds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderfds" EntityType="Self.Orderfds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderfms" EntityType="Self.Orderfms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderfs" EntityType="Self.Orderfs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orderms" EntityType="Self.Orderms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parentf" EntityType="Self.Parentf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RevenueCategory" EntityType="Self.RevenueCategory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChartOfAccount_RevenueCategory" Association="Self.FK_ChartOfAccount_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChartOfAccountf_RevenueCategory" Association="Self.FK_ChartOfAccountf_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Child_Parent" Association="Self.FK_Child_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Child" EntitySet="Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Childf_Parentf" Association="Self.FK_Childf_Parentf">
+            <End Role="Parentf" EntitySet="Parentf" />
+            <End Role="Childf" EntitySet="Childf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Child" Association="Self.FK_Customer_Child">
+            <End Role="Child" EntitySet="Child" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_FisicalYear" Association="Self.FK_Customer_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Parent" Association="Self.FK_Customer_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Child" Association="Self.FK_Customerd_Child">
+            <End Role="Child" EntitySet="Child" />
+            <End Role="Customerd" EntitySet="Customerd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_FisicalYear" Association="Self.FK_Customerd_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customerd" EntitySet="Customerd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Month" Association="Self.FK_Customerd_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Customerd" EntitySet="Customerd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Parent" Association="Self.FK_Customerd_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Customerd" EntitySet="Customerd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Childf" Association="Self.FK_Customerdf_Childf">
+            <End Role="Childf" EntitySet="Childf" />
+            <End Role="Customerdf" EntitySet="Customerdf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_FisicalYear" Association="Self.FK_Customerdf_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customerdf" EntitySet="Customerdf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Month" Association="Self.FK_Customerdf_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Customerdf" EntitySet="Customerdf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Parentf" Association="Self.FK_Customerdf_Parentf">
+            <End Role="Parentf" EntitySet="Parentf" />
+            <End Role="Customerdf" EntitySet="Customerdf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_Childf" Association="Self.FK_Customerf_Childf">
+            <End Role="Childf" EntitySet="Childf" />
+            <End Role="Customerf" EntitySet="Customerf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_FisicalYear" Association="Self.FK_Customerf_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customerf" EntitySet="Customerf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_Parentf" Association="Self.FK_Customerf_Parentf">
+            <End Role="Parentf" EntitySet="Parentf" />
+            <End Role="Customerf" EntitySet="Customerf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Childf" Association="Self.FK_Customerfm_Childf">
+            <End Role="Childf" EntitySet="Childf" />
+            <End Role="Customerfm" EntitySet="Customerfm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_FisicalYear" Association="Self.FK_Customerfm_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customerfm" EntitySet="Customerfm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Month" Association="Self.FK_Customerfm_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Customerfm" EntitySet="Customerfm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Parent" Association="Self.FK_Customerfm_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Customerfm" EntitySet="Customerfm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Child" Association="Self.FK_Customerm_Child">
+            <End Role="Child" EntitySet="Child" />
+            <End Role="Customerm" EntitySet="Customerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_FisicalYear" Association="Self.FK_Customerm_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Customerm" EntitySet="Customerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Month" Association="Self.FK_Customerm_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Customerm" EntitySet="Customerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Parent" Association="Self.FK_Customerm_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Customerm" EntitySet="Customerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Month_FisicalYear" Association="Self.FK_Month_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYear" />
+            <End Role="Month" EntitySet="Month" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderds_Customerd" Association="Self.FK_Orderds_Customerd">
+            <End Role="Customerd" EntitySet="Customerd" />
+            <End Role="Orderds" EntitySet="Orderds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderds_RevenueCategory" Association="Self.FK_Orderds_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orderds" EntitySet="Orderds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_ChartOfAccountf" Association="Self.FK_Orderfds_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountf" />
+            <End Role="Orderfds" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_Customerdf" Association="Self.FK_Orderfds_Customerdf">
+            <End Role="Customerdf" EntitySet="Customerdf" />
+            <End Role="Orderfds" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_RevenueCategory" Association="Self.FK_Orderfds_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orderfds" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_ChartOfAccountf" Association="Self.FK_Orderfms_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountf" />
+            <End Role="Orderfms" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_Customerm" Association="Self.FK_Orderfms_Customerm">
+            <End Role="Customerfm" EntitySet="Customerfm" />
+            <End Role="Orderfms" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_RevenueCategory" Association="Self.FK_Orderfms_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orderfms" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_ChartOfAccountf" Association="Self.FK_Orderfs_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountf" />
+            <End Role="Orderfs" EntitySet="Orderfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_Customerf" Association="Self.FK_Orderfs_Customerf">
+            <End Role="Customerf" EntitySet="Customerf" />
+            <End Role="Orderfs" EntitySet="Orderfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_RevenueCategory" Association="Self.FK_Orderfs_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orderfs" EntitySet="Orderfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_ChartOfAccount" Association="Self.FK_Orderms_ChartOfAccount">
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccount" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_Customerm" Association="Self.FK_Orderms_Customerm">
+            <End Role="Customerm" EntitySet="Customerm" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_RevenueCategory" Association="Self.FK_Orderms_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ChartOfAccount" Association="Self.FK_Orders_ChartOfAccount">
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccount" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_RevenueCategory" Association="Self.FK_Orders_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategory" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChartOfAccount">
+          <Key>
+            <PropertyRef Name="ChartOfAccountId" />
+          </Key>
+          <Property Name="ChartOfAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChartOfAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_ChartOfAccount_RevenueCategory" FromRole="ChartOfAccount" ToRole="RevenueCategory" />
+          <NavigationProperty Name="Orderms" Relationship="Self.FK_Orderms_ChartOfAccount" FromRole="ChartOfAccount" ToRole="Orderms" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ChartOfAccount" FromRole="ChartOfAccount" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Child">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Child_Parent" FromRole="Child" ToRole="Parent" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Child" FromRole="Child" ToRole="Customer" />
+          <NavigationProperty Name="Customerds" Relationship="Self.FK_Customerd_Child" FromRole="Child" ToRole="Customerd" />
+          <NavigationProperty Name="Customerms" Relationship="Self.FK_Customerm_Child" FromRole="Child" ToRole="Customerm" />
+        </EntityType>
+        <EntityType Name="Childf">
+          <Key>
+            <PropertyRef Name="ChildId" />
+          </Key>
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Parentf" Relationship="Self.FK_Childf_Parentf" FromRole="Childf" ToRole="Parentf" />
+          <NavigationProperty Name="Customerdfs" Relationship="Self.FK_Customerdf_Childf" FromRole="Childf" ToRole="Customerdf" />
+          <NavigationProperty Name="Customerfs" Relationship="Self.FK_Customerf_Childf" FromRole="Childf" ToRole="Customerf" />
+          <NavigationProperty Name="Customerfms" Relationship="Self.FK_Customerfm_Childf" FromRole="Childf" ToRole="Customerfm" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Customer_Child" FromRole="Customer" ToRole="Child" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customer_FisicalYear" FromRole="Customer" ToRole="FisicalYear" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Customer_Parent" FromRole="Customer" ToRole="Parent" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customer" FromRole="Customer" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Customerd">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MonthId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Customerd_Child" FromRole="Customerd" ToRole="Child" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customerd_FisicalYear" FromRole="Customerd" ToRole="FisicalYear" />
+          <NavigationProperty Name="Month" Relationship="Self.FK_Customerd_Month" FromRole="Customerd" ToRole="Month" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Customerd_Parent" FromRole="Customerd" ToRole="Parent" />
+          <NavigationProperty Name="Orderds" Relationship="Self.FK_Orderds_Customerd" FromRole="Customerd" ToRole="Orderds" />
+        </EntityType>
+        <EntityType Name="Customerdf">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MonthId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Childf" Relationship="Self.FK_Customerdf_Childf" FromRole="Customerdf" ToRole="Childf" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customerdf_FisicalYear" FromRole="Customerdf" ToRole="FisicalYear" />
+          <NavigationProperty Name="Month" Relationship="Self.FK_Customerdf_Month" FromRole="Customerdf" ToRole="Month" />
+          <NavigationProperty Name="Parentf" Relationship="Self.FK_Customerdf_Parentf" FromRole="Customerdf" ToRole="Parentf" />
+          <NavigationProperty Name="Orderfds" Relationship="Self.FK_Orderfds_Customerdf" FromRole="Customerdf" ToRole="Orderfds" />
+        </EntityType>
+        <EntityType Name="Customerf">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Childf" Relationship="Self.FK_Customerf_Childf" FromRole="Customerf" ToRole="Childf" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customerf_FisicalYear" FromRole="Customerf" ToRole="FisicalYear" />
+          <NavigationProperty Name="Parentf" Relationship="Self.FK_Customerf_Parentf" FromRole="Customerf" ToRole="Parentf" />
+          <NavigationProperty Name="Orderfs" Relationship="Self.FK_Orderfs_Customerf" FromRole="Customerf" ToRole="Orderfs" />
+        </EntityType>
+        <EntityType Name="Customerfm">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MonthId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Childf" Relationship="Self.FK_Customerfm_Childf" FromRole="Customerfm" ToRole="Childf" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customerfm_FisicalYear" FromRole="Customerfm" ToRole="FisicalYear" />
+          <NavigationProperty Name="Month" Relationship="Self.FK_Customerfm_Month" FromRole="Customerfm" ToRole="Month" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Customerfm_Parent" FromRole="Customerfm" ToRole="Parent" />
+          <NavigationProperty Name="Orderfms" Relationship="Self.FK_Orderfms_Customerm" FromRole="Customerfm" ToRole="Orderfms" />
+        </EntityType>
+        <EntityType Name="Customerm">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MonthId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Child" Relationship="Self.FK_Customerm_Child" FromRole="Customerm" ToRole="Child" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Customerm_FisicalYear" FromRole="Customerm" ToRole="FisicalYear" />
+          <NavigationProperty Name="Month" Relationship="Self.FK_Customerm_Month" FromRole="Customerm" ToRole="Month" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK_Customerm_Parent" FromRole="Customerm" ToRole="Parent" />
+          <NavigationProperty Name="Orderms" Relationship="Self.FK_Orderms_Customerm" FromRole="Customerm" ToRole="Orderms" />
+        </EntityType>
+        <EntityType Name="FisicalYear">
+          <Key>
+            <PropertyRef Name="FisicalYearId" />
+          </Key>
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FisicalYearName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_FisicalYear" FromRole="FisicalYear" ToRole="Customer" />
+          <NavigationProperty Name="Customerds" Relationship="Self.FK_Customerd_FisicalYear" FromRole="FisicalYear" ToRole="Customerd" />
+          <NavigationProperty Name="Customerdfs" Relationship="Self.FK_Customerdf_FisicalYear" FromRole="FisicalYear" ToRole="Customerdf" />
+          <NavigationProperty Name="Customerfs" Relationship="Self.FK_Customerf_FisicalYear" FromRole="FisicalYear" ToRole="Customerf" />
+          <NavigationProperty Name="Customerfms" Relationship="Self.FK_Customerfm_FisicalYear" FromRole="FisicalYear" ToRole="Customerfm" />
+          <NavigationProperty Name="Customerms" Relationship="Self.FK_Customerm_FisicalYear" FromRole="FisicalYear" ToRole="Customerm" />
+          <NavigationProperty Name="Months" Relationship="Self.FK_Month_FisicalYear" FromRole="FisicalYear" ToRole="Month" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthId" />
+          </Key>
+          <Property Name="MonthId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MonthName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FisicalYearId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customerds" Relationship="Self.FK_Customerd_Month" FromRole="Month" ToRole="Customerd" />
+          <NavigationProperty Name="Customerdfs" Relationship="Self.FK_Customerdf_Month" FromRole="Month" ToRole="Customerdf" />
+          <NavigationProperty Name="Customerfms" Relationship="Self.FK_Customerfm_Month" FromRole="Month" ToRole="Customerfm" />
+          <NavigationProperty Name="Customerms" Relationship="Self.FK_Customerm_Month" FromRole="Month" ToRole="Customerm" />
+          <NavigationProperty Name="FisicalYear" Relationship="Self.FK_Month_FisicalYear" FromRole="Month" ToRole="FisicalYear" />
+        </EntityType>
+        <EntityType Name="Orderd">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customerd" Relationship="Self.FK_Orderds_Customerd" FromRole="Orderds" ToRole="Customerd" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orderds_RevenueCategory" FromRole="Orderds" ToRole="RevenueCategory" />
+        </EntityType>
+        <EntityType Name="Orderfd">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customerdf" Relationship="Self.FK_Orderfds_Customerdf" FromRole="Orderfds" ToRole="Customerdf" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orderfds_RevenueCategory" FromRole="Orderfds" ToRole="RevenueCategory" />
+          <Property Name="ChartOfAccountId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChartOfAccountf" Relationship="OnlineShopModel.FK_Orderfds_ChartOfAccountf" FromRole="Orderfd" ToRole="ChartOfAccountf" />
+        </EntityType>
+        <EntityType Name="Orderfm">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customerfm" Relationship="Self.FK_Orderfms_Customerm" FromRole="Orderfms" ToRole="Customerfm" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orderfms_RevenueCategory" FromRole="Orderfms" ToRole="RevenueCategory" />
+          <Property Name="ChartOfAccountId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChartOfAccountf" Relationship="OnlineShopModel.FK_Orderfms_ChartOfAccountf" FromRole="Orderfm" ToRole="ChartOfAccountf" />
+        </EntityType>
+        <EntityType Name="Orderf">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customerf" Relationship="Self.FK_Orderfs_Customerf" FromRole="Orderfs" ToRole="Customerf" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orderfs_RevenueCategory" FromRole="Orderfs" ToRole="RevenueCategory" />
+          <Property Name="ChartOfAccountId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChartOfAccountf" Relationship="OnlineShopModel.FK_Orderfs_ChartOfAccountf" FromRole="Orderf" ToRole="ChartOfAccountf" />
+        </EntityType>
+        <EntityType Name="Orderm">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ChartOfAccount" Relationship="Self.FK_Orderms_ChartOfAccount" FromRole="Orderms" ToRole="ChartOfAccount" />
+          <NavigationProperty Name="Customerm" Relationship="Self.FK_Orderms_Customerm" FromRole="Orderms" ToRole="Customerm" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orderms_RevenueCategory" FromRole="Orderms" ToRole="RevenueCategory" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChartOfAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amountyplan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amountyperformance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ChartOfAccount" Relationship="Self.FK_Orders_ChartOfAccount" FromRole="Orders" ToRole="ChartOfAccount" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customer" FromRole="Orders" ToRole="Customer" />
+          <NavigationProperty Name="RevenueCategory" Relationship="Self.FK_Orders_RevenueCategory" FromRole="Orders" ToRole="RevenueCategory" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Children" Relationship="Self.FK_Child_Parent" FromRole="Parent" ToRole="Child" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Parent" FromRole="Parent" ToRole="Customer" />
+          <NavigationProperty Name="Customerds" Relationship="Self.FK_Customerd_Parent" FromRole="Parent" ToRole="Customerd" />
+          <NavigationProperty Name="Customerfms" Relationship="Self.FK_Customerfm_Parent" FromRole="Parent" ToRole="Customerfm" />
+          <NavigationProperty Name="Customerms" Relationship="Self.FK_Customerm_Parent" FromRole="Parent" ToRole="Customerm" />
+        </EntityType>
+        <EntityType Name="Parentf">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Childfs" Relationship="Self.FK_Childf_Parentf" FromRole="Parentf" ToRole="Childf" />
+          <NavigationProperty Name="Customerdfs" Relationship="Self.FK_Customerdf_Parentf" FromRole="Parentf" ToRole="Customerdf" />
+          <NavigationProperty Name="Customerfs" Relationship="Self.FK_Customerf_Parentf" FromRole="Parentf" ToRole="Customerf" />
+        </EntityType>
+        <EntityType Name="RevenueCategory">
+          <Key>
+            <PropertyRef Name="RevenueCategoryId" />
+          </Key>
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RevenueCategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ChartOfAccounts" Relationship="Self.FK_ChartOfAccount_RevenueCategory" FromRole="RevenueCategory" ToRole="ChartOfAccount" />
+          <NavigationProperty Name="Orderds" Relationship="Self.FK_Orderds_RevenueCategory" FromRole="RevenueCategory" ToRole="Orderds" />
+          <NavigationProperty Name="Orderfds" Relationship="Self.FK_Orderfds_RevenueCategory" FromRole="RevenueCategory" ToRole="Orderfds" />
+          <NavigationProperty Name="Orderfms" Relationship="Self.FK_Orderfms_RevenueCategory" FromRole="RevenueCategory" ToRole="Orderfms" />
+          <NavigationProperty Name="Orderfs" Relationship="Self.FK_Orderfs_RevenueCategory" FromRole="RevenueCategory" ToRole="Orderfs" />
+          <NavigationProperty Name="Orderms" Relationship="Self.FK_Orderms_RevenueCategory" FromRole="RevenueCategory" ToRole="Orderms" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_RevenueCategory" FromRole="RevenueCategory" ToRole="Orders" />
+          <NavigationProperty Name="ChartOfAccountfs" Relationship="OnlineShopModel.FK_ChartOfAccountf_RevenueCategory" FromRole="RevenueCategory" ToRole="ChartOfAccountf" />
+        </EntityType>
+        <Association Name="FK_ChartOfAccount_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="0..1" />
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="ChartOfAccount">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_ChartOfAccount">
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccount">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ChartOfAccount">
+          <End Role="ChartOfAccount" Type="Self.ChartOfAccount" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccount">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Child_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+          <End Role="Child" Type="Self.Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Child">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Child">
+          <End Role="Child" Type="Self.Child" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Child">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Childf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="0..1" />
+          <End Role="Childf" Type="Self.Childf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Childf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Childf">
+          <End Role="Childf" Type="Self.Childf" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Childf">
+              <PropertyRef Name="ChildId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerd_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerd">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderds_Customerd">
+          <End Role="Customerd" Type="Self.Customerd" Multiplicity="1" />
+          <End Role="Orderds" Type="Self.Orderd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerd">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderds">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerdf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="1" />
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerdf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_Customerdf">
+          <End Role="Customerdf" Type="Self.Customerdf" Multiplicity="1" />
+          <End Role="Orderfds" Type="Self.Orderfd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerdf">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfds">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerf_Parentf">
+          <End Role="Parentf" Type="Self.Parentf" Multiplicity="1" />
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parentf">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_Customerf">
+          <End Role="Customerf" Type="Self.Customerf" Multiplicity="1" />
+          <End Role="Orderfs" Type="Self.Orderf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerf">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerfm_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerfm">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_Customerm">
+          <End Role="Customerfm" Type="Self.Customerfm" Multiplicity="1" />
+          <End Role="Orderfms" Type="Self.Orderfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerfm">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderfms">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="MonthId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customerm_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Customerm">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_Customerm">
+          <End Role="Customerm" Type="Self.Customerm" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customerm">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Month_FisicalYear">
+          <End Role="FisicalYear" Type="Self.FisicalYear" Multiplicity="0..1" />
+          <End Role="Month" Type="Self.Month" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FisicalYear">
+              <PropertyRef Name="FisicalYearId" />
+            </Principal>
+            <Dependent Role="Month">
+              <PropertyRef Name="FisicalYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderds_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderds" Type="Self.Orderd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderds">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfds" Type="Self.Orderfd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfds">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfms" Type="Self.Orderfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfms">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderfs" Type="Self.Orderf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderfs">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderms_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orderms" Type="Self.Orderm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orderms">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_RevenueCategory">
+          <End Role="RevenueCategory" Type="Self.RevenueCategory" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChartOfAccounts" EntityType="Self.ChartOfAccount" />
+          <EntitySet Name="Children" EntityType="Self.Child" />
+          <EntitySet Name="Childfs" EntityType="Self.Childf" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Customerds" EntityType="Self.Customerd" />
+          <EntitySet Name="Customerdfs" EntityType="Self.Customerdf" />
+          <EntitySet Name="Customerfs" EntityType="Self.Customerf" />
+          <EntitySet Name="Customerfms" EntityType="Self.Customerfm" />
+          <EntitySet Name="Customerms" EntityType="Self.Customerm" />
+          <EntitySet Name="FisicalYears" EntityType="Self.FisicalYear" />
+          <EntitySet Name="Months" EntityType="Self.Month" />
+          <EntitySet Name="Orderds" EntityType="Self.Orderd" />
+          <EntitySet Name="Orderfds" EntityType="Self.Orderfd" />
+          <EntitySet Name="Orderfms" EntityType="Self.Orderfm" />
+          <EntitySet Name="Orderfs" EntityType="Self.Orderf" />
+          <EntitySet Name="Orderms" EntityType="Self.Orderm" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Parents" EntityType="Self.Parent" />
+          <EntitySet Name="Parentfs" EntityType="Self.Parentf" />
+          <EntitySet Name="RevenueCategories" EntityType="Self.RevenueCategory" />
+          <AssociationSet Name="FK_ChartOfAccount_RevenueCategory" Association="Self.FK_ChartOfAccount_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_ChartOfAccount" Association="Self.FK_Orderms_ChartOfAccount">
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccounts" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ChartOfAccount" Association="Self.FK_Orders_ChartOfAccount">
+            <End Role="ChartOfAccount" EntitySet="ChartOfAccounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Child_Parent" Association="Self.FK_Child_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Child" EntitySet="Children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Child" Association="Self.FK_Customer_Child">
+            <End Role="Child" EntitySet="Children" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Child" Association="Self.FK_Customerd_Child">
+            <End Role="Child" EntitySet="Children" />
+            <End Role="Customerd" EntitySet="Customerds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Child" Association="Self.FK_Customerm_Child">
+            <End Role="Child" EntitySet="Children" />
+            <End Role="Customerm" EntitySet="Customerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Childf_Parentf" Association="Self.FK_Childf_Parentf">
+            <End Role="Parentf" EntitySet="Parentfs" />
+            <End Role="Childf" EntitySet="Childfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Childf" Association="Self.FK_Customerdf_Childf">
+            <End Role="Childf" EntitySet="Childfs" />
+            <End Role="Customerdf" EntitySet="Customerdfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_Childf" Association="Self.FK_Customerf_Childf">
+            <End Role="Childf" EntitySet="Childfs" />
+            <End Role="Customerf" EntitySet="Customerfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Childf" Association="Self.FK_Customerfm_Childf">
+            <End Role="Childf" EntitySet="Childfs" />
+            <End Role="Customerfm" EntitySet="Customerfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_FisicalYear" Association="Self.FK_Customer_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Parent" Association="Self.FK_Customer_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_FisicalYear" Association="Self.FK_Customerd_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customerd" EntitySet="Customerds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Month" Association="Self.FK_Customerd_Month">
+            <End Role="Month" EntitySet="Months" />
+            <End Role="Customerd" EntitySet="Customerds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerd_Parent" Association="Self.FK_Customerd_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Customerd" EntitySet="Customerds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderds_Customerd" Association="Self.FK_Orderds_Customerd">
+            <End Role="Customerd" EntitySet="Customerds" />
+            <End Role="Orderds" EntitySet="Orderds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_FisicalYear" Association="Self.FK_Customerdf_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customerdf" EntitySet="Customerdfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Month" Association="Self.FK_Customerdf_Month">
+            <End Role="Month" EntitySet="Months" />
+            <End Role="Customerdf" EntitySet="Customerdfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerdf_Parentf" Association="Self.FK_Customerdf_Parentf">
+            <End Role="Parentf" EntitySet="Parentfs" />
+            <End Role="Customerdf" EntitySet="Customerdfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_Customerdf" Association="Self.FK_Orderfds_Customerdf">
+            <End Role="Customerdf" EntitySet="Customerdfs" />
+            <End Role="Orderfds" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_FisicalYear" Association="Self.FK_Customerf_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customerf" EntitySet="Customerfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerf_Parentf" Association="Self.FK_Customerf_Parentf">
+            <End Role="Parentf" EntitySet="Parentfs" />
+            <End Role="Customerf" EntitySet="Customerfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_Customerf" Association="Self.FK_Orderfs_Customerf">
+            <End Role="Customerf" EntitySet="Customerfs" />
+            <End Role="Orderfs" EntitySet="Orderfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_FisicalYear" Association="Self.FK_Customerfm_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customerfm" EntitySet="Customerfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Month" Association="Self.FK_Customerfm_Month">
+            <End Role="Month" EntitySet="Months" />
+            <End Role="Customerfm" EntitySet="Customerfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerfm_Parent" Association="Self.FK_Customerfm_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Customerfm" EntitySet="Customerfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_Customerm" Association="Self.FK_Orderfms_Customerm">
+            <End Role="Customerfm" EntitySet="Customerfms" />
+            <End Role="Orderfms" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_FisicalYear" Association="Self.FK_Customerm_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Customerm" EntitySet="Customerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Month" Association="Self.FK_Customerm_Month">
+            <End Role="Month" EntitySet="Months" />
+            <End Role="Customerm" EntitySet="Customerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customerm_Parent" Association="Self.FK_Customerm_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Customerm" EntitySet="Customerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_Customerm" Association="Self.FK_Orderms_Customerm">
+            <End Role="Customerm" EntitySet="Customerms" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Month_FisicalYear" Association="Self.FK_Month_FisicalYear">
+            <End Role="FisicalYear" EntitySet="FisicalYears" />
+            <End Role="Month" EntitySet="Months" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderds_RevenueCategory" Association="Self.FK_Orderds_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orderds" EntitySet="Orderds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_RevenueCategory" Association="Self.FK_Orderfds_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orderfds" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_RevenueCategory" Association="Self.FK_Orderfms_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orderfms" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_RevenueCategory" Association="Self.FK_Orderfs_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orderfs" EntitySet="Orderfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderms_RevenueCategory" Association="Self.FK_Orderms_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orderms" EntitySet="Orderms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_RevenueCategory" Association="Self.FK_Orders_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="ChartOfAccountfs" EntityType="OnlineShopModel.ChartOfAccountf" />
+          <AssociationSet Name="FK_ChartOfAccountf_RevenueCategory" Association="OnlineShopModel.FK_ChartOfAccountf_RevenueCategory">
+            <End Role="RevenueCategory" EntitySet="RevenueCategories" />
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfds_ChartOfAccountf" Association="OnlineShopModel.FK_Orderfds_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountfs" />
+            <End Role="Orderfd" EntitySet="Orderfds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfms_ChartOfAccountf" Association="OnlineShopModel.FK_Orderfms_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountfs" />
+            <End Role="Orderfm" EntitySet="Orderfms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orderfs_ChartOfAccountf" Association="OnlineShopModel.FK_Orderfs_ChartOfAccountf">
+            <End Role="ChartOfAccountf" EntitySet="ChartOfAccountfs" />
+            <End Role="Orderf" EntitySet="Orderfs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ChartOfAccountf">
+          <Key>
+            <PropertyRef Name="ChartOfAccountId" />
+          </Key>
+          <Property Name="ChartOfAccountId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChartOfAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueCategoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RevenueCategory" Relationship="OnlineShopModel.FK_ChartOfAccountf_RevenueCategory" FromRole="ChartOfAccountf" ToRole="RevenueCategory" />
+          <NavigationProperty Name="Orderfds" Relationship="OnlineShopModel.FK_Orderfds_ChartOfAccountf" FromRole="ChartOfAccountf" ToRole="Orderfd" />
+          <NavigationProperty Name="Orderfms" Relationship="OnlineShopModel.FK_Orderfms_ChartOfAccountf" FromRole="ChartOfAccountf" ToRole="Orderfm" />
+          <NavigationProperty Name="Orderfs" Relationship="OnlineShopModel.FK_Orderfs_ChartOfAccountf" FromRole="ChartOfAccountf" ToRole="Orderf" />
+        </EntityType>
+        <Association Name="FK_ChartOfAccountf_RevenueCategory">
+          <End Type="OnlineShopModel.RevenueCategory" Role="RevenueCategory" Multiplicity="0..1" />
+          <End Type="OnlineShopModel.ChartOfAccountf" Role="ChartOfAccountf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RevenueCategory">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Principal>
+            <Dependent Role="ChartOfAccountf">
+              <PropertyRef Name="RevenueCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfds_ChartOfAccountf">
+          <End Type="OnlineShopModel.ChartOfAccountf" Role="ChartOfAccountf" Multiplicity="1" />
+          <End Type="OnlineShopModel.Orderfd" Role="Orderfd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderfd">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfms_ChartOfAccountf">
+          <End Type="OnlineShopModel.ChartOfAccountf" Role="ChartOfAccountf" Multiplicity="1" />
+          <End Type="OnlineShopModel.Orderfm" Role="Orderfm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderfm">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orderfs_ChartOfAccountf">
+          <End Type="OnlineShopModel.ChartOfAccountf" Role="ChartOfAccountf" Multiplicity="1" />
+          <End Type="OnlineShopModel.Orderf" Role="Orderf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChartOfAccountf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Principal>
+            <Dependent Role="Orderf">
+              <PropertyRef Name="ChartOfAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineShopModelStoreContainer" CdmEntityContainer="OnlineShopEntities">
+          <EntitySetMapping Name="ChartOfAccounts">
+            <EntityTypeMapping TypeName="OnlineShopModel.ChartOfAccount">
+              <MappingFragment StoreEntitySet="ChartOfAccount">
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="ChartOfAccountName" ColumnName="ChartOfAccountName" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Children">
+            <EntityTypeMapping TypeName="OnlineShopModel.Child">
+              <MappingFragment StoreEntitySet="Child">
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Childfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.Childf">
+              <MappingFragment StoreEntitySet="Childf">
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="ChildName" ColumnName="ChildName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customerds">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customerd">
+              <MappingFragment StoreEntitySet="Customerd">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customerdfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customerdf">
+              <MappingFragment StoreEntitySet="Customerdf">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customerfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customerf">
+              <MappingFragment StoreEntitySet="Customerf">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customerfms">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customerfm">
+              <MappingFragment StoreEntitySet="Customerfm">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customerms">
+            <EntityTypeMapping TypeName="OnlineShopModel.Customerm">
+              <MappingFragment StoreEntitySet="Customerm">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FisicalYears">
+            <EntityTypeMapping TypeName="OnlineShopModel.FisicalYear">
+              <MappingFragment StoreEntitySet="FisicalYear">
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+                <ScalarProperty Name="FisicalYearName" ColumnName="FisicalYearName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Months">
+            <EntityTypeMapping TypeName="OnlineShopModel.Month">
+              <MappingFragment StoreEntitySet="Month">
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="FisicalYearId" ColumnName="FisicalYearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderds">
+            <EntityTypeMapping TypeName="OnlineShopModel.Orderd">
+              <MappingFragment StoreEntitySet="Orderds">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderfds">
+            <EntityTypeMapping TypeName="OnlineShopModel.Orderfd">
+              <MappingFragment StoreEntitySet="Orderfds">
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderfms">
+            <EntityTypeMapping TypeName="OnlineShopModel.Orderfm">
+              <MappingFragment StoreEntitySet="Orderfms">
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.Orderf">
+              <MappingFragment StoreEntitySet="Orderfs">
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orderms">
+            <EntityTypeMapping TypeName="OnlineShopModel.Orderm">
+              <MappingFragment StoreEntitySet="Orderms">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OnlineShopModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+                <ScalarProperty Name="Amountyplan" ColumnName="Amountyplan" />
+                <ScalarProperty Name="Amountyperformance" ColumnName="Amountyperformance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="OnlineShopModel.Parent">
+              <MappingFragment StoreEntitySet="Parent">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parentfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.Parentf">
+              <MappingFragment StoreEntitySet="Parentf">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RevenueCategories">
+            <EntityTypeMapping TypeName="OnlineShopModel.RevenueCategory">
+              <MappingFragment StoreEntitySet="RevenueCategory">
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="RevenueCategoryName" ColumnName="RevenueCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChartOfAccountfs">
+            <EntityTypeMapping TypeName="OnlineShopModel.ChartOfAccountf">
+              <MappingFragment StoreEntitySet="ChartOfAccountf">
+                <ScalarProperty Name="RevenueCategoryId" ColumnName="RevenueCategoryId" />
+                <ScalarProperty Name="ChartOfAccountName" ColumnName="ChartOfAccountName" />
+                <ScalarProperty Name="ChartOfAccountId" ColumnName="ChartOfAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

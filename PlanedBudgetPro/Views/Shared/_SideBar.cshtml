@@ -1,0 +1,753 @@
+﻿
+<aside class="main-sidebar elevation-2 position-absolute" style="background-color: #276ba9;color:white;">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+        <img src="~/img/logo1.jpg"
+             alt="AARB Logo"
+             class="brand-image img-circle elevation-0"
+             style="opacity: .8">
+        <div>
+            <span class="brand-text" style="
+    color: #d5ba79;
+">eRevenue System</span>
+        </div>
+    </a>
+
+    <!-- Sidebar -->
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+            @if (Request.IsAuthenticated)
+            {
+                <li class="nav-item hover">
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt" style="color:white"></i>
+                        <p>
+                            ጠቋሚ
+                        </p>
+                    </a>
+                </li>
+            }
+            <li class="nav-item">
+                <a is-active-page href="#" target="_blank" class="nav-link">
+                    <i class="nav-icon fas fa-book" style="color:white"></i>
+                    <p>
+                        የሲስተም አጠቃቀም መመርያ
+
+                        @*<iframe src="~/manual/FRNetUserManual-en.pdf" frameborder="0" height="100" width="100">
+                            </iframe>*@
+                    </p>
+                </a>
+            </li>
+            @if (User.IsInRole("Admin") || User.IsInRole("Center") || User.IsInRole("Subcityadministration") || User.IsInRole("Centralsector"))
+            {
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tasks" style="color:white"></i>
+                        <p>
+                            እቅድ
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav-item nav-treeview">
+                        <a href="#" class="nav-link">
+                            <span style="margin-left:10%">
+                                <i class="fas fa-plus" style="color:white"></i>
+                                <p>
+                                    እለታዊ እቅድ
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </span>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orderds")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                        <p>በገቢ ዓይነት</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orderfds")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                        <p>እለታዊ እቅድ በፌደራል</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Daily")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                        <p>በገቢ ዓይነት የሁሉም</p>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </ul>
+
+
+                    <ul class="nav-item nav-treeview">
+                        <a href="#" class="nav-link">
+                            <span style="margin-left:10%">
+                                <i class="fas fa-plus" style="color:white"></i>
+                                <p>
+                                    በዝርዝር
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </span>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orders")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                        <p>ዓመታዊ እቅድ</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orderfs")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                        <p>
+                                            ዓመታዊ እቅድ በፌደራል
+                                        </p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Yearly")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                        <p>ዓመታዊ እቅድ የሁሉም</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orderms")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                        <p>ወርሃዊ እቅድ</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Orderfms")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                        <p>
+                                            ወርሃዊ እቅድ በፌደራል
+                                        </p>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Monthly")" class="nav-link">
+                                    <span style="margin-left:20%">
+                                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                        <p>ወርሃዊ እቅድ  የሁሉም</p>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("Center") || User.IsInRole("Manager"))
+            {
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book-open" style="color:white"></i>
+                        <p>
+                            ሪፖርት የቅ/ጽ/ቤት
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Dailyreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                <p>እለታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Monthlyreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MonthlyTotalreportbychartof")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MontlyTotalReportChartOfAccountOnly")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Yearlyreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartofaccount")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartOnly")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ዓመታዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Quraterlyreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>የሩብ ዓመት ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+
+
+
+            }
+            @if (User.IsInRole("Admin"))
+            {
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book-open" style="color:white"></i>
+                        <p>
+                            ሪፖርት የፌደራል
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Dailyfederalreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                <p>እለታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Monthlyfederalreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Yearlyfederalreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+
+
+
+
+                    </ul>
+                </li>
+
+
+
+
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("Centralsector") || User.IsInRole("Manager"))
+            {
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book-open" style="color:white"></i>
+                        <p>
+                            ሪፖርት የማዕከል ሴክተር
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Dailycentralsectorreport")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                <p>እለታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Monthlyreportcentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MonthlyTotalreportbychartofcentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MontlyTotalReportChartOfAccountOnlycentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Yearlyreportcentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartofaccountcentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartOnlycentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ዓመታዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Quraterlyreportcentralsector")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>የሩብ ዓመት ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+
+
+
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("Subcityadministration") || User.IsInRole("Manager"))
+            {
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book-open" style="color:white"></i>
+                        <p>
+                            ሪፖርት የክ/ከ/አስተዳደር
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Dailyreportsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:red"></i>
+                                <p>እለታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Monthlyreportsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MonthlyTotalreportbychartofsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MontlyTotalReportChartOfAccountOnlysubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ወርሃዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Yearlyreportsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartofaccountsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                                <p>ዓመታዊ በዝርዝር ሪፖርት</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "YearlyTotalreportbychartOnlysubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>ዓመታዊ በዝርዝር ጥቅል ሪፖርት</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Quraterlyreportsubcityadministration")" class="nav-link">
+                                <i class="fas fa-sun nav-icon" style="color:green"></i>
+                                <p>የሩብ ዓመት ሪፖርት</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+
+
+
+            }
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item has-treeview menu-open">
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">
+                        <i class="fa fa-users" aria-hidden="true" style="color:white"></i>
+                        <p>
+                            User Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Roles Admin
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    User Admin
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item hover">
+                            <a href="@Url.Action("Index", "Home")" class="nav-link">
+                                <i class="nav-icon fas fa-envelope" style="color:white"></i>
+                                <p>
+                                    Message
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            }
+
+
+
+
+        </ul>
+
+    </nav>
+    <!-- /.sidebar-menu -->
+    <!-- /.sidebar -->
+</aside>
+
+
+
+<!--<aside class="main-sidebar elevation-2 position-absolute" style="background-color: #276ba9;color:white;">
+    <!-- Brand Logo -->
+<!--<a href="/" class="brand-link">
+    <img src="~/img/logo1.jpg"
+         alt="AARB Logo"
+         class="brand-image img-circle elevation-0"
+         style="opacity: .8">
+    <div>
+        <span class="brand-text">eRevenue System</span>
+    </div>
+</a>-->
+<!-- Sidebar -->
+<!-- Sidebar Menu -->
+<!--<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">-->
+<!-- Add icons to the links using the .nav-icon class
+with font-awesome or any other icon font library -->
+<!--<li class="nav-item hover">
+    <a href="@Url.Action("Index", "Home")" class="nav-link">
+        <i class="nav-icon fas fa-tachometer-alt" style="color:white"></i>
+        <p>
+            ጠቋሚ
+        </p>
+    </a>
+</li>
+<li class="nav-item">
+    <a is-active-page href="~/manual/FRNetUserManual-en.pdf" target="_blank" class="nav-link">
+        <i class="nav-icon fas fa-book" style="color:white"></i>
+        <p>
+            የሲስተም አጠቃቀም መመርያ-->
+@*<iframe src="~/manual/FRNetUserManual-en.pdf" frameborder="0" height="100" width="100">
+    </iframe>*@
+<!--</p>
+    </a>
+</li>
+<li class="nav-item hover">
+
+    <a href="@Url.Action("Index", "Letter")" class="nav-link">
+        <i class="nav-icon fas fa-file-alt" style="color:white"></i>
+        <p>
+            ደብዳቤ
+
+        </p>
+    </a>
+</li>
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-tasks" style="color:white"></i>
+        <p>
+            እቅድ
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav-item nav-treeview">
+        <a href="#" class="nav-link">
+            <span style="margin-left:10%">
+                <i class="fas fa-plus" style="color:white"></i>
+                <p>
+                    እለታዊ እቅድ
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </span>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderds")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                        <p>በገቢ ዓይነት</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderfds")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                        <p>በገቢ ዓይነት</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("All", "Orderds")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:green"></i>
+                        <p>በገቢ ዓይነት የሁሉም</p>
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+    </ul>
+
+
+    <ul class="nav-item nav-treeview">
+        <a href="#" class="nav-link">
+            <span style="margin-left:10%">
+                <i class="fas fa-plus" style="color:white"></i>
+                <p>
+                    በዝርዝር
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </span>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orders")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                        <p>ዓመታዊ እቅድ</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderfs")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                        <p>
+                            ዓመታዊ እቅድ በፌደራል
+                        </p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("All", "Orders")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                        <p>ዓመታዊ እቅድ የሁሉም</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderms")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                        <p>ወርሃዊ እቅድ</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderfms")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                        <p>
+                            ወርሃዊ እቅድ በፌደራል
+                        </p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Orderms")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                        <p>ወርሃዊ እቅድ</p>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("All", "Orderms")" class="nav-link">
+                    <span style="margin-left:20%">
+                        <i class="fas fa-sun nav-icon" style="color:red"></i>
+                        <p>ወርሃዊ እቅድ  የሁሉም</p>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </ul>
+</li>
+
+@if (User.IsInRole("Admin"))
+{
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book-open" style="color:white"></i>
+            <p>
+                ሪፖርት
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Dailyreport")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:red"></i>
+                    <p>እለታዊ በጥቅል ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Monthlyreport")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:green"></i>
+                    <p>ወርሃዊ በጥቅል ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Yearlyreport")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                    <p>ዓመታዊ በጥቅል ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "MonthlyTotalreportbychartof")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:green"></i>
+                    <p>ወርሃዊ በዝርዝር ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "YearlyTotalreportbychartofaccount")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                    <p>ዓመታዊ በዝርዝር ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "MonthlyFederalTotal")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:green"></i>
+                    <p>ወርሃዊ የፌዴራል ሪፖርት</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "YearlyFederalTotalreport")" class="nav-link">
+                    <i class="fas fa-sun nav-icon" style="color:yellow"></i>
+                    <p>ዓመታዊ የፌዴራል ሪፖርት</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+}-->
+@*@if (User.IsInRole("Admin"))
+    {*@
+<!--<li class="nav-item has-treeview menu-open">
+    <a href="@Url.Action("Index", "Home")" class="nav-link">
+        <i class="fa fa-users" aria-hidden="true" style="color:white"></i>
+        <p>
+            User Management
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Roles Admin
+                    <span class="right badge badge-danger">New</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                    User Admin
+                    <span class="right badge badge-danger">New</span>
+                </p>
+            </a>
+        </li>
+    </ul>
+
+</li>-->
+@*}*@
+
+        </ul>
+    </nav>-->
+<!-- /.sidebar-menu -->
+<!-- /.sidebar -->
+<!--</aside>-->

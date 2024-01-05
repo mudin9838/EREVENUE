@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="DataSourcePlan">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=DESKTOP-1KKDKOD;Initial Catalog=OnlineShop</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
+    <Prompt>Specify a user name and password for data source DataSourcePlan</Prompt>
+  </ConnectionProperties>
+  <DataSourceID>b9296fcb-8fdb-4f17-add7-1d32f307a0f7</DataSourceID>
+</RptDataSource>

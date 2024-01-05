@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PlanedBudgetPro.Models.Parent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="#" data-toggle="popover" data-trigger="hover" id="@item.ParentId">@item.ParentName</a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ParentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ParentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ParentId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#DataTable').DataTable();
+            $('[data-toggle="popover"]').popover({
+                title: setData,
+                html: true,
+                placement: 'right'
+            });
+            function setData(id) {
+                var set_data = '';
+                var element = $(this);
+                var id = element.attr("id");
+                $.ajax({
+                    url: "/Parents/Details?id" + id,
+                    method: "post",
+                    async: false,
+                    data: { id: id },
+                    success: function (data) {
+                        set_data = data;
+                    }
+                });
+                return set_data;
+            }
+        });
+    </script>  
+    }

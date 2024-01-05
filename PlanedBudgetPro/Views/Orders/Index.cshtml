@@ -1,0 +1,816 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<PlanedBudgetPro.Models.Customer>
+
+@{
+
+}
+
+<br class="hidden-print" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <h2 class="panel-title pull-right" style="margin-left:10px;">
+                @*<strong>Order Details</strong>*@
+            </h2>
+            <button style="margin-left:83%;" class="btn btn-success hidden-print pull-right" id="btnNewItem" onclick="addNewOrder()">
+                አመታዊ እቅድ ያቅዱ
+            </button>
+        </div>
+    </div>
+
+    @*Receive All Database Data From Controller And Display Those Data In Client Side*@
+
+
+
+    @if (Model.Count() != 0)
+    {
+        <div class="panel panel-body">
+            <div id="accordion">
+                @foreach (var item in Model)
+                {
+                    <div class="group">
+                        <h6>
+
+                            <span style="width: 33.33%;text-align:center;">
+                                ቅ/ፅ/ቤት: @item.Child.ChildName
+                            </span>
+                            <span style="margin-left:15%">የበጀት ዓመት: @item.FisicalYear.FisicalYearName</span>
+                            <span style="margin-left:25%">ቀን: @item.OrderDate.Date.ToString("dd-MM-yyyy") </span>
+
+
+                        </h6>
+
+                        <div>
+
+                            <table class="table table-striped table-responsive">
+                                <tr>
+                                    <td style="width:20%;">
+                                        <a href="#" id="delete" class="btn btn-danger btn-sm bi bi-trash pull-right deleteCustomer" data-val-customerId="@item.CustomerId">አጥፋ</a>
+                                        <button id="btnEdit" class="btn btn-warning btn-sm bi bi-pencil pull-left btnEdit" data-val-customerId="@item.CustomerId">
+                                            እርማት ያድርጉ
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <table id="example1" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>የገቢ መደብ</th>
+                                                    <th>የገቢ አይነት</th>
+                                                    <th>የታቀደ ብር</th>
+                                                    <th>አፈፃፀም በብር</th>
+                                                </tr>
+                                            </thead>
+
+                                            @{
+                                                decimal totalPlan = 0;
+                                            }
+                                            @{
+                                                decimal totalPerformance = 0;
+                                            }
+
+                                            @foreach (var order in item.Orders)
+                                            {
+                                                <tr>
+                                                    <td>@order.ChartOfAccount.ChartOfAccountId</td>
+                                                    <td>@order.ChartOfAccount.ChartOfAccountName</td>
+                                                    <td>@order.Amountyplan.ToString("#,##0.00")</td>
+                                                    <td>@order.Amountyperformance.ToString("#,##0.00")</td>
+                                                </tr>
+                                                totalPlan = totalPlan + Convert.ToDecimal(order.Amountyplan);
+                                                totalPerformance = totalPerformance + Convert.ToDecimal(order.Amountyperformance);
+
+                                            }
+
+                                        </table>
+                                        <div style="margin-left:50%">
+                                            <span class="pull-right" style="margin-right: 100px">
+                                                <strong>ጠቅላላ:: </strong> @totalPlan.ToString("#,##0.00")
+                                            </span>
+                                            <span class="pull-right" style="margin-right: 100px">
+                                                <strong>ጠቅላላ:: </strong> @totalPerformance.ToString("#,##0.00")
+                                            </span>
+
+                                        </div>
+
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-body">
+            <div class="row">
+                <h3 style="color:red;"> አመታዊ እቅድ አልታቀደም!</h3>
+            </div>
+        </div>
+    }
+</div>
+<div class="panel panel-footer" style="color:red;">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>
+
+@*Bootstrap Model*@
+@*Bootstrap Model*@
+<div class="modal fade" id="newOrderModal">
+    @*<div class="modal-dialog modal-lg" style="width: 900px !important;">*@
+    <div class="modal-dialog modal-lg" style="width: 95% !important;">
+        <div class="modal-content" style="width:130%;">
+
+            <div class="modal-header btn-warning">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                @*<h4>Add New Order</h4>*@
+            </div>
+            <form id="NewOrderForm">
+                <div class="modal-body">
+                    <h5 style="color:#ff6347">ቅድሚያ የእቅድ መረጃ ይምረጡ</h5>
+                    <hr style="border-top: 3px dashed #d4edda " />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="CustomerId" />
+                        <div class="form-group">
+                            <div class="row m-md-2">
+                                <label class="control-label col-md-2">
+                                    እናት መ/ቤት
+                                </label>
+                                <div class="col-md-4">
+                                    <select id="name" class="form-control ParentId">
+                                        @*<option>ይምረጡ</option>*@
+
+                                    </select>
+                                    @*<input type="text" id="name" placeholder="Customer Name" class="form-control" />*@
+                                </div>
+                                <label class="control-label col-md-2">
+                                    ቅ/ፅ/ቤት
+                                </label>
+                                <div class="col-md-4">
+                                    <select id="address" class="form-control ChildId">
+                                        @*<option>select</option>*@
+
+                                    </select>
+                                    @*<input type="text" id="address" placeholder="Customer Address" class="form-control" />*@
+                                </div>
+                            </div>
+                            <div class="row m-md-2">
+                                <label class="control-label col-md-2">
+                                    የበጀት ዓመት
+                                </label>
+                                <div class="col-md-4">
+                                    <select id="fisicalyearid" name="fisicalyearid" class="form-control">
+                                        @*<option>select</option>*@
+
+                                    </select>
+                                    @*<input type="text" id="address" placeholder="Customer Address" class="form-control" />*@
+                                </div>
+
+                                <label class="control-label col-md-2">
+                                    ቀን
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" id="popupDatepicker" name="popupDatepicker" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<h5 style="margin-top:10px ;color:#ff6347">Order Details</h5>*@
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="OrderId" />
+
+                        <div class="form-group">
+                            <div class="row m-md-2">
+                                <label class="control-label col-md-2">Category</label>
+                                <div class="col-md-4">
+                                    <select id="RevenueCategoryId" name="RevenueCategoryId" class="form-control revenueCategoryId">
+                                        @*<option>select</option>*@
+
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-md-2">ChartOfAccount</label>
+                                <div class="col-md-4">
+                                    <select id="ChartOfAccountId" name="ChartOfAccountId" class="form-control revenueCategoryId">
+                                        @*<option>select</option>*@
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row m-md-2">
+                                <label class="control-label col-md-2">አመታዊ እቅድ በብር </label>
+                                <div class="col-md-4">
+                                    <input type="number" id="amountyplan" name="amountyplan" placeholder="አመታዊ እቅድ በብር" class="form-control" />
+                                </div>
+                                <label class="control-label col-md-2">አመታዊ አፈፃፀም በብር </label>
+
+                                <div class="col-md-4">
+                                    <input type="number" id="amountyperformance" name="amountyperformance" placeholder="አመታዊ አፈፃፀም በብር" class="form-control" />
+
+                                </div>
+                                <div class="col-md-2 col-lg-offset-4">
+                                    <a href="#" id="addToList" class="btn btn-primary">ወደ እቅድ ይጨምሩ</a>
+                                    <a href="#" id="updateList" class="btn btn-success" style="display: none">አዘምን</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="#">
+                            <fieldset>
+                                <input type="text" name="search" value="" id="id_search" placeholder="የገቢ ኮድ ፈልግ..." autofocus />
+                            </fieldset>
+                        </form>
+                        @*Details Part*@
+                        <table id="detailsTable" class="table tablesorter tablesorter-default" role="grid">
+                            <thead>
+                                <tr role="row" class="tablesorter-headerRow">
+                                    <th style="width: 30%; user-select: none;" data-column="0" class="tablesorter-header tablesorter-headerUnSorted" tabindex="0" scope="col" role="columnheader" aria-disabled="false" aria-controls="detailsTable" unselectable="on" aria-sort="none" aria-label="የገቢ አይነት: No sort applied, activate to apply a descending sort"><div class="tablesorter-header-inner">የገቢ አይነት</div></th>
+                                    <th style="width: 20%; user-select: none;" data-column="1" class="tablesorter-header tablesorter-headerUnSorted" tabindex="0" scope="col" role="columnheader" aria-disabled="false" aria-controls="detailsTable" unselectable="on" aria-sort="none" aria-label="የገቢ አርእስት: No sort applied, activate to apply a descending sort"><div class="tablesorter-header-inner">የገቢ አርእስት</div></th>
+                                    <th style="width: 15%; user-select: none;" data-column="2" class="tablesorter-header tablesorter-headerAsc" tabindex="0" scope="col" role="columnheader" aria-disabled="false" aria-controls="detailsTable" unselectable="on" aria-sort="ascending" aria-label="ወርሓዊ እቅድ በብር: Ascending sort applied, activate to apply a descending sort"><div class="tablesorter-header-inner">ወርሓዊ እቅድ በብር</div></th>
+                                    <th style="width: 20%; user-select: none;" data-column="3" class="tablesorter-header tablesorter-headerUnSorted" tabindex="0" scope="col" role="columnheader" aria-disabled="false" aria-controls="detailsTable" unselectable="on" aria-sort="none" aria-label="ወርሓዊ አፈፃፀም በብር: No sort applied, activate to apply an ascending sort"><div class="tablesorter-header-inner">ወርሓዊ አፈፃፀም በብር</div></th>
+
+
+                                    <th style="width: 15%; user-select: none;" data-column="4" class="tablesorter-header tablesorter-headerUnSorted" tabindex="0" scope="col" role="columnheader" aria-disabled="false" aria-controls="detailsTable" unselectable="on" aria-sort="none" aria-label=": No sort applied, activate to apply an ascending sort"><div class="tablesorter-header-inner"></div></th>
+
+                                </tr>
+                            </thead>
+                            <tbody aria-live="polite" aria-relevant="all"><tr role="row"><td style="display:none">4885a08b-2ae6-4ca8-97ef-4e3d000a40f2</td><td>1100-1119</td><td>1101</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="4885a08b-2ae6-4ca8-97ef-4e3d000a40f2"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="4885a08b-2ae6-4ca8-97ef-4e3d000a40f2"></a></td></tr><tr role="row"><td style="display:none">777af2f9-87ea-4c54-bdb5-6cae7633992a</td><td>1100-1119</td><td>1102</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="777af2f9-87ea-4c54-bdb5-6cae7633992a"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="777af2f9-87ea-4c54-bdb5-6cae7633992a"></a></td></tr><tr role="row"><td style="display:none">53eece28-455f-4712-8a6b-780e60f9d9d1</td><td>1100-1119</td><td>1103</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="53eece28-455f-4712-8a6b-780e60f9d9d1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="53eece28-455f-4712-8a6b-780e60f9d9d1"></a></td></tr><tr role="row"><td style="display:none">d2e54b1b-e392-44a1-8ab1-e4cf87f360f4</td><td>1100-1119</td><td>1106</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="d2e54b1b-e392-44a1-8ab1-e4cf87f360f4"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="d2e54b1b-e392-44a1-8ab1-e4cf87f360f4"></a></td></tr><tr role="row"><td style="display:none">19701b8d-67b7-4ab1-9d82-4463d7af6761</td><td>1100-1119</td><td>1107</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="19701b8d-67b7-4ab1-9d82-4463d7af6761"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="19701b8d-67b7-4ab1-9d82-4463d7af6761"></a></td></tr><tr role="row"><td style="display:none">a83b81ad-da97-46e0-92f9-7b6583540ead</td><td>1100-1119</td><td>1109</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="a83b81ad-da97-46e0-92f9-7b6583540ead"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="a83b81ad-da97-46e0-92f9-7b6583540ead"></a></td></tr><tr role="row"><td style="display:none">211476a6-4985-4672-8a47-dd4e1e2420a6</td><td>1100-1119</td><td>1111</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="211476a6-4985-4672-8a47-dd4e1e2420a6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="211476a6-4985-4672-8a47-dd4e1e2420a6"></a></td></tr><tr role="row"><td style="display:none">43ab42dc-e11c-4572-863e-7d141d28efc1</td><td>1100-1119</td><td>1112</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="43ab42dc-e11c-4572-863e-7d141d28efc1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="43ab42dc-e11c-4572-863e-7d141d28efc1"></a></td></tr><tr role="row"><td style="display:none">5e47fe33-9348-48ff-ad2e-6ede277a8543</td><td>1100-1119</td><td>1119</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="5e47fe33-9348-48ff-ad2e-6ede277a8543"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="5e47fe33-9348-48ff-ad2e-6ede277a8543"></a></td></tr><tr role="row"><td style="display:none">c3db7ed2-f7ec-48f9-b8fe-0b86b2fcf327</td><td>1120-1299</td><td>1122</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c3db7ed2-f7ec-48f9-b8fe-0b86b2fcf327"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c3db7ed2-f7ec-48f9-b8fe-0b86b2fcf327"></a></td></tr><tr role="row"><td style="display:none">819ea37d-d5a0-4122-8459-2536138f5b21</td><td>1120-1299</td><td>1123</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="819ea37d-d5a0-4122-8459-2536138f5b21"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="819ea37d-d5a0-4122-8459-2536138f5b21"></a></td></tr><tr role="row"><td style="display:none">ef209570-a653-40d9-a4e6-975e23d58230</td><td>1120-1299</td><td>1124</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="ef209570-a653-40d9-a4e6-975e23d58230"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="ef209570-a653-40d9-a4e6-975e23d58230"></a></td></tr><tr role="row"><td style="display:none">04c8799f-5231-40f5-bef7-8f28e7a3b31a</td><td>1120-1299</td><td>1125</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="04c8799f-5231-40f5-bef7-8f28e7a3b31a"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="04c8799f-5231-40f5-bef7-8f28e7a3b31a"></a></td></tr><tr role="row"><td style="display:none">793e95be-f915-439f-af96-588a88c7381a</td><td>1120-1299</td><td>1126</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="793e95be-f915-439f-af96-588a88c7381a"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="793e95be-f915-439f-af96-588a88c7381a"></a></td></tr><tr role="row"><td style="display:none">f88ad3b3-a9f5-4d37-bcea-4f41dfcdd9ae</td><td>1120-1299</td><td>1127</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="f88ad3b3-a9f5-4d37-bcea-4f41dfcdd9ae"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="f88ad3b3-a9f5-4d37-bcea-4f41dfcdd9ae"></a></td></tr><tr role="row"><td style="display:none">fbd37311-1432-4a0c-96c9-e4ef62785ae8</td><td>1120-1299</td><td>1128</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="fbd37311-1432-4a0c-96c9-e4ef62785ae8"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="fbd37311-1432-4a0c-96c9-e4ef62785ae8"></a></td></tr><tr role="row"><td style="display:none">50f58a7a-d122-4b85-8cb7-34dbebcf308c</td><td>1120-1299</td><td>1129</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="50f58a7a-d122-4b85-8cb7-34dbebcf308c"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="50f58a7a-d122-4b85-8cb7-34dbebcf308c"></a></td></tr><tr role="row"><td style="display:none">23c68bbb-6fb9-49df-af58-5d928a980dbc</td><td>1120-1299</td><td>1131</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="23c68bbb-6fb9-49df-af58-5d928a980dbc"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="23c68bbb-6fb9-49df-af58-5d928a980dbc"></a></td></tr><tr role="row"><td style="display:none">2fbee19d-39a6-4afa-9162-83587cccbf38</td><td>1120-1299</td><td>1132</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2fbee19d-39a6-4afa-9162-83587cccbf38"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2fbee19d-39a6-4afa-9162-83587cccbf38"></a></td></tr><tr role="row"><td style="display:none">6eb74790-01c1-4cf4-bea8-c5a86d7ccee1</td><td>1120-1299</td><td>1133</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="6eb74790-01c1-4cf4-bea8-c5a86d7ccee1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="6eb74790-01c1-4cf4-bea8-c5a86d7ccee1"></a></td></tr><tr role="row"><td style="display:none">7eaca465-9bb2-432e-95c6-06914fbc34fc</td><td>1120-1299</td><td>1134</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="7eaca465-9bb2-432e-95c6-06914fbc34fc"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="7eaca465-9bb2-432e-95c6-06914fbc34fc"></a></td></tr><tr role="row"><td style="display:none">81cba14e-3a81-4db4-b463-38697c9cf676</td><td>1120-1299</td><td>1135</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="81cba14e-3a81-4db4-b463-38697c9cf676"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="81cba14e-3a81-4db4-b463-38697c9cf676"></a></td></tr><tr role="row"><td style="display:none">cfbea2dc-ff3c-465a-8ef0-545339cbf5ae</td><td>1120-1299</td><td>1136</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="cfbea2dc-ff3c-465a-8ef0-545339cbf5ae"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="cfbea2dc-ff3c-465a-8ef0-545339cbf5ae"></a></td></tr><tr role="row"><td style="display:none">e0da0695-0d63-4dbd-9df3-b89a395e923e</td><td>1120-1299</td><td>1137</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e0da0695-0d63-4dbd-9df3-b89a395e923e"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e0da0695-0d63-4dbd-9df3-b89a395e923e"></a></td></tr><tr role="row"><td style="display:none">429faa1e-9542-4d3b-bf00-1a2217fe1bdf</td><td>1120-1299</td><td>1138</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="429faa1e-9542-4d3b-bf00-1a2217fe1bdf"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="429faa1e-9542-4d3b-bf00-1a2217fe1bdf"></a></td></tr><tr role="row"><td style="display:none">f25e020a-eb20-4244-8ba1-c8de4ff4c922</td><td>1120-1299</td><td>1139</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="f25e020a-eb20-4244-8ba1-c8de4ff4c922"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="f25e020a-eb20-4244-8ba1-c8de4ff4c922"></a></td></tr><tr role="row"><td style="display:none">8b6a53ee-3e37-4413-8465-8d16b4559029</td><td>1120-1299</td><td>1141</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="8b6a53ee-3e37-4413-8465-8d16b4559029"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="8b6a53ee-3e37-4413-8465-8d16b4559029"></a></td></tr><tr role="row"><td style="display:none">39f30f70-536c-4b34-a91e-150e00da7c8f</td><td>1120-1299</td><td>1142</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="39f30f70-536c-4b34-a91e-150e00da7c8f"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="39f30f70-536c-4b34-a91e-150e00da7c8f"></a></td></tr><tr role="row"><td style="display:none">9e9537b3-4b79-4adf-ba20-3cd2336177cc</td><td>1120-1299</td><td>1143</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="9e9537b3-4b79-4adf-ba20-3cd2336177cc"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="9e9537b3-4b79-4adf-ba20-3cd2336177cc"></a></td></tr><tr role="row"><td style="display:none">4ace8d3a-ee6a-476b-ae6a-e76b7356697f</td><td>1120-1299</td><td>1144</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="4ace8d3a-ee6a-476b-ae6a-e76b7356697f"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="4ace8d3a-ee6a-476b-ae6a-e76b7356697f"></a></td></tr><tr role="row"><td style="display:none">66b25800-f0ce-499f-b84c-6be1d4f261f8</td><td>1120-1299</td><td>1169</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="66b25800-f0ce-499f-b84c-6be1d4f261f8"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="66b25800-f0ce-499f-b84c-6be1d4f261f8"></a></td></tr><tr role="row"><td style="display:none">c88d475e-19d4-4d50-8d64-f6c32c16f0ff</td><td>1120-1299</td><td>1173</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c88d475e-19d4-4d50-8d64-f6c32c16f0ff"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c88d475e-19d4-4d50-8d64-f6c32c16f0ff"></a></td></tr><tr role="row"><td style="display:none">1212cfd0-c9be-41ef-92ca-687adc3d6d39</td><td>1120-1299</td><td>1174</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="1212cfd0-c9be-41ef-92ca-687adc3d6d39"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="1212cfd0-c9be-41ef-92ca-687adc3d6d39"></a></td></tr><tr role="row"><td style="display:none">3db8f73c-95b6-4ab6-9b82-d0296bc281a4</td><td>1120-1299</td><td>1175</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3db8f73c-95b6-4ab6-9b82-d0296bc281a4"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3db8f73c-95b6-4ab6-9b82-d0296bc281a4"></a></td></tr><tr role="row"><td style="display:none">b6bb0738-dead-46c8-ba06-c6484b1da0f0</td><td>1120-1299</td><td>1176</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b6bb0738-dead-46c8-ba06-c6484b1da0f0"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b6bb0738-dead-46c8-ba06-c6484b1da0f0"></a></td></tr><tr role="row"><td style="display:none">17c5391c-ef63-4509-a3cc-91b9e809ba38</td><td>1120-1299</td><td>1177</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="17c5391c-ef63-4509-a3cc-91b9e809ba38"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="17c5391c-ef63-4509-a3cc-91b9e809ba38"></a></td></tr><tr role="row"><td style="display:none">4bb114b7-7bdc-4452-9aa2-82b0142bab0a</td><td>1120-1299</td><td>1178</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="4bb114b7-7bdc-4452-9aa2-82b0142bab0a"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="4bb114b7-7bdc-4452-9aa2-82b0142bab0a"></a></td></tr><tr role="row"><td style="display:none">733618e2-f73f-4295-92a8-0a65a24363d0</td><td>1120-1299</td><td>1199</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="733618e2-f73f-4295-92a8-0a65a24363d0"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="733618e2-f73f-4295-92a8-0a65a24363d0"></a></td></tr><tr role="row"><td style="display:none">5ba8ee01-256a-4d7f-8844-7ba4f09cbca8</td><td>1120-1299</td><td>1201</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="5ba8ee01-256a-4d7f-8844-7ba4f09cbca8"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="5ba8ee01-256a-4d7f-8844-7ba4f09cbca8"></a></td></tr><tr role="row"><td style="display:none">67f65803-cc5e-4c5e-b617-3f295d5e430b</td><td>1120-1299</td><td>1202</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="67f65803-cc5e-4c5e-b617-3f295d5e430b"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="67f65803-cc5e-4c5e-b617-3f295d5e430b"></a></td></tr><tr role="row"><td style="display:none">c76737e3-50c0-49a8-b80e-34c8a707edcd</td><td>1120-1299</td><td>1203</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c76737e3-50c0-49a8-b80e-34c8a707edcd"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c76737e3-50c0-49a8-b80e-34c8a707edcd"></a></td></tr><tr role="row"><td style="display:none">01c7ba27-9fa5-440d-b6d0-9c4174e22532</td><td>1120-1299</td><td>1205</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="01c7ba27-9fa5-440d-b6d0-9c4174e22532"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="01c7ba27-9fa5-440d-b6d0-9c4174e22532"></a></td></tr><tr role="row"><td style="display:none">9515e803-3a40-4053-a62b-a5918b58ea11</td><td>1120-1299</td><td>1206</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="9515e803-3a40-4053-a62b-a5918b58ea11"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="9515e803-3a40-4053-a62b-a5918b58ea11"></a></td></tr><tr role="row"><td style="display:none">a300c832-73f8-4fd4-a41b-968a60c5d097</td><td>1120-1299</td><td>1207</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="a300c832-73f8-4fd4-a41b-968a60c5d097"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="a300c832-73f8-4fd4-a41b-968a60c5d097"></a></td></tr><tr role="row"><td style="display:none">3d77773a-1e9b-419d-ba45-d9519c6803d9</td><td>1120-1299</td><td>1208</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3d77773a-1e9b-419d-ba45-d9519c6803d9"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3d77773a-1e9b-419d-ba45-d9519c6803d9"></a></td></tr><tr role="row"><td style="display:none">f3211077-b4fe-49ba-847c-5baacb871395</td><td>1120-1299</td><td>1209</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="f3211077-b4fe-49ba-847c-5baacb871395"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="f3211077-b4fe-49ba-847c-5baacb871395"></a></td></tr><tr role="row"><td style="display:none">56a58586-27f3-4f32-8fa2-7e5b40d14d36</td><td>1120-1299</td><td>1211</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="56a58586-27f3-4f32-8fa2-7e5b40d14d36"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="56a58586-27f3-4f32-8fa2-7e5b40d14d36"></a></td></tr><tr role="row"><td style="display:none">b38dc92a-f99c-4227-9812-e466530467b7</td><td>1120-1299</td><td>1212</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b38dc92a-f99c-4227-9812-e466530467b7"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b38dc92a-f99c-4227-9812-e466530467b7"></a></td></tr><tr role="row"><td style="display:none">c55e9965-2f05-4192-90fb-f5a5b61beceb</td><td>1120-1299</td><td>1213</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c55e9965-2f05-4192-90fb-f5a5b61beceb"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c55e9965-2f05-4192-90fb-f5a5b61beceb"></a></td></tr><tr role="row"><td style="display:none">03e7d60c-6668-4f63-8180-8b32aab796f5</td><td>1120-1299</td><td>1219</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="03e7d60c-6668-4f63-8180-8b32aab796f5"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="03e7d60c-6668-4f63-8180-8b32aab796f5"></a></td></tr><tr role="row"><td style="display:none">0fcad31b-bd69-4ab6-b9c0-bafde0b61194</td><td>1120-1299</td><td>1221</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="0fcad31b-bd69-4ab6-b9c0-bafde0b61194"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="0fcad31b-bd69-4ab6-b9c0-bafde0b61194"></a></td></tr><tr role="row"><td style="display:none">e7f3ecd2-8cac-4cbe-aa07-8598b78c83db</td><td>1120-1299</td><td>1222</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e7f3ecd2-8cac-4cbe-aa07-8598b78c83db"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e7f3ecd2-8cac-4cbe-aa07-8598b78c83db"></a></td></tr><tr role="row"><td style="display:none">aa200080-561e-49c6-8321-8877740335e7</td><td>1120-1299</td><td>1223</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="aa200080-561e-49c6-8321-8877740335e7"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="aa200080-561e-49c6-8321-8877740335e7"></a></td></tr><tr role="row"><td style="display:none">9ea801bf-4c1c-416b-a9bf-448a510055a8</td><td>1120-1299</td><td>1224</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="9ea801bf-4c1c-416b-a9bf-448a510055a8"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="9ea801bf-4c1c-416b-a9bf-448a510055a8"></a></td></tr><tr role="row"><td style="display:none">2fb721f0-4678-4d0b-9c21-29c7fd539e43</td><td>1120-1299</td><td>1225</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2fb721f0-4678-4d0b-9c21-29c7fd539e43"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2fb721f0-4678-4d0b-9c21-29c7fd539e43"></a></td></tr><tr role="row"><td style="display:none">3e247644-bcca-473f-9eb1-dad5572039e6</td><td>1120-1299</td><td>1226</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3e247644-bcca-473f-9eb1-dad5572039e6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3e247644-bcca-473f-9eb1-dad5572039e6"></a></td></tr><tr role="row"><td style="display:none">b01aa98b-2b54-4a20-a0a6-cbac8c6da1e4</td><td>1120-1299</td><td>1227</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b01aa98b-2b54-4a20-a0a6-cbac8c6da1e4"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b01aa98b-2b54-4a20-a0a6-cbac8c6da1e4"></a></td></tr><tr role="row"><td style="display:none">4154c3f2-a103-42c7-9a93-79ee014634bf</td><td>1120-1299</td><td>1228</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="4154c3f2-a103-42c7-9a93-79ee014634bf"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="4154c3f2-a103-42c7-9a93-79ee014634bf"></a></td></tr><tr role="row"><td style="display:none">3e111769-56ab-425c-a020-3a8ecbb04fec</td><td>1120-1299</td><td>1229</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3e111769-56ab-425c-a020-3a8ecbb04fec"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3e111769-56ab-425c-a020-3a8ecbb04fec"></a></td></tr><tr role="row"><td style="display:none">cdb492e2-5ab5-4341-b732-87465e981712</td><td>1120-1299</td><td>1231</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="cdb492e2-5ab5-4341-b732-87465e981712"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="cdb492e2-5ab5-4341-b732-87465e981712"></a></td></tr><tr role="row"><td style="display:none">806a819f-8991-4143-87d4-09828407cd40</td><td>1120-1299</td><td>1232</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="806a819f-8991-4143-87d4-09828407cd40"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="806a819f-8991-4143-87d4-09828407cd40"></a></td></tr><tr role="row"><td style="display:none">988bc8c1-fb8f-49e9-97ce-286c0d050e5c</td><td>1120-1299</td><td>1233</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="988bc8c1-fb8f-49e9-97ce-286c0d050e5c"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="988bc8c1-fb8f-49e9-97ce-286c0d050e5c"></a></td></tr><tr role="row"><td style="display:none">ba3b588c-4bc4-4776-8e52-5c2202dc6690</td><td>1120-1299</td><td>1234</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="ba3b588c-4bc4-4776-8e52-5c2202dc6690"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="ba3b588c-4bc4-4776-8e52-5c2202dc6690"></a></td></tr><tr role="row"><td style="display:none">63211d8b-4f64-43d3-9908-a6d3a51ce0ac</td><td>1120-1299</td><td>1235</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="63211d8b-4f64-43d3-9908-a6d3a51ce0ac"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="63211d8b-4f64-43d3-9908-a6d3a51ce0ac"></a></td></tr><tr role="row"><td style="display:none">f36af9ed-60b5-41d5-be28-83feb2bd1f5d</td><td>1120-1299</td><td>1236</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="f36af9ed-60b5-41d5-be28-83feb2bd1f5d"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="f36af9ed-60b5-41d5-be28-83feb2bd1f5d"></a></td></tr><tr role="row"><td style="display:none">eb0f45cd-c7eb-44ce-a61f-4641a3ebd205</td><td>1120-1299</td><td>1237</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="eb0f45cd-c7eb-44ce-a61f-4641a3ebd205"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="eb0f45cd-c7eb-44ce-a61f-4641a3ebd205"></a></td></tr><tr role="row"><td style="display:none">301a0b2b-d716-4703-b6a8-c16b00fde951</td><td>1120-1299</td><td>1238</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="301a0b2b-d716-4703-b6a8-c16b00fde951"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="301a0b2b-d716-4703-b6a8-c16b00fde951"></a></td></tr><tr role="row"><td style="display:none">36fb783d-6445-4869-bf65-6f4c9fa1f2de</td><td>1120-1299</td><td>1249</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="36fb783d-6445-4869-bf65-6f4c9fa1f2de"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="36fb783d-6445-4869-bf65-6f4c9fa1f2de"></a></td></tr><tr role="row"><td style="display:none">8007bfeb-0de2-4308-a56d-dd2867a513d2</td><td>1120-1299</td><td>1252</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="8007bfeb-0de2-4308-a56d-dd2867a513d2"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="8007bfeb-0de2-4308-a56d-dd2867a513d2"></a></td></tr><tr role="row"><td style="display:none">86aeb8ce-1f90-4213-8837-5a957f7db283</td><td>1120-1299</td><td>1253</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="86aeb8ce-1f90-4213-8837-5a957f7db283"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="86aeb8ce-1f90-4213-8837-5a957f7db283"></a></td></tr><tr role="row"><td style="display:none">bfa57dbd-488a-4987-8285-c8ad54c0aa28</td><td>1120-1299</td><td>1254</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="bfa57dbd-488a-4987-8285-c8ad54c0aa28"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="bfa57dbd-488a-4987-8285-c8ad54c0aa28"></a></td></tr><tr role="row"><td style="display:none">29d557b8-1726-476e-943b-fdf857cd2afe</td><td>1120-1299</td><td>1255</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="29d557b8-1726-476e-943b-fdf857cd2afe"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="29d557b8-1726-476e-943b-fdf857cd2afe"></a></td></tr><tr role="row"><td style="display:none">92848604-c482-4ab2-85b0-ab27a887f3a2</td><td>1120-1299</td><td>1256</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="92848604-c482-4ab2-85b0-ab27a887f3a2"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="92848604-c482-4ab2-85b0-ab27a887f3a2"></a></td></tr><tr role="row"><td style="display:none">8cd4d610-dd5d-44d4-82f2-f3449fdd4959</td><td>1120-1299</td><td>1257</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="8cd4d610-dd5d-44d4-82f2-f3449fdd4959"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="8cd4d610-dd5d-44d4-82f2-f3449fdd4959"></a></td></tr><tr role="row"><td style="display:none">fe1b66e6-7fba-4efb-a661-46e59eb81ae1</td><td>1120-1299</td><td>1258</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="fe1b66e6-7fba-4efb-a661-46e59eb81ae1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="fe1b66e6-7fba-4efb-a661-46e59eb81ae1"></a></td></tr><tr role="row"><td style="display:none">da66a360-5e69-409d-a66f-40ff72992932</td><td>1120-1299</td><td>1259</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="da66a360-5e69-409d-a66f-40ff72992932"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="da66a360-5e69-409d-a66f-40ff72992932"></a></td></tr><tr role="row"><td style="display:none">d75aa7ad-2a16-4974-80fe-a311f2c23f70</td><td>1120-1299</td><td>1261</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="d75aa7ad-2a16-4974-80fe-a311f2c23f70"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="d75aa7ad-2a16-4974-80fe-a311f2c23f70"></a></td></tr><tr role="row"><td style="display:none">504dff05-c3bf-4841-b1fe-e7780d920cb0</td><td>1120-1299</td><td>1262</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="504dff05-c3bf-4841-b1fe-e7780d920cb0"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="504dff05-c3bf-4841-b1fe-e7780d920cb0"></a></td></tr><tr role="row"><td style="display:none">3c520249-d7a0-4485-b95e-c425d293fb92</td><td>1120-1299</td><td>1263</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3c520249-d7a0-4485-b95e-c425d293fb92"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3c520249-d7a0-4485-b95e-c425d293fb92"></a></td></tr><tr role="row"><td style="display:none">33ea514d-27b3-45df-8a1c-fa737a1a86e9</td><td>1120-1299</td><td>1264</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="33ea514d-27b3-45df-8a1c-fa737a1a86e9"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="33ea514d-27b3-45df-8a1c-fa737a1a86e9"></a></td></tr><tr role="row"><td style="display:none">56c1525a-6d04-4455-8cff-b99176e10572</td><td>1120-1299</td><td>1279</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="56c1525a-6d04-4455-8cff-b99176e10572"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="56c1525a-6d04-4455-8cff-b99176e10572"></a></td></tr><tr role="row"><td style="display:none">c327925b-2434-490e-b723-00f24f655d22</td><td>1120-1299</td><td>1291</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c327925b-2434-490e-b723-00f24f655d22"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c327925b-2434-490e-b723-00f24f655d22"></a></td></tr><tr role="row"><td style="display:none">2c36e381-ae52-4405-8ffa-092eefdae23e</td><td>1120-1299</td><td>1292</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2c36e381-ae52-4405-8ffa-092eefdae23e"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2c36e381-ae52-4405-8ffa-092eefdae23e"></a></td></tr><tr role="row"><td style="display:none">aeb9d7b6-27a5-4e0d-8dc0-35c5a9ce2fef</td><td>1120-1299</td><td>1293</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="aeb9d7b6-27a5-4e0d-8dc0-35c5a9ce2fef"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="aeb9d7b6-27a5-4e0d-8dc0-35c5a9ce2fef"></a></td><tr><td style="display:none">6678135c-5439-40fb-88aa-d66d250745cf</td><td>1120-1299</td><td>1265</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="6678135c-5439-40fb-88aa-d66d250745cf"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="6678135c-5439-40fb-88aa-d66d250745cf"></a></td></tr><tr><td style="display:none">feb534d0-4646-44a4-9c9c-3efa329bb890</td><td>1120-1299</td><td>1266</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="feb534d0-4646-44a4-9c9c-3efa329bb890"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="feb534d0-4646-44a4-9c9c-3efa329bb890"></a></td></tr></tr><tr><td style="display:none">6d8adb43-045e-46b6-ae81-b7cdc3f51cf7</td><td>1120-1299</td><td>1267</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="6d8adb43-045e-46b6-ae81-b7cdc3f51cf7"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="6d8adb43-045e-46b6-ae81-b7cdc3f51cf7"></a></td></tr><tr><td style="display:none">d060c198-57f5-4a08-98b0-4b0ee6c4ded6</td><td>1120-1299</td><td>1268</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="d060c198-57f5-4a08-98b0-4b0ee6c4ded6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="d060c198-57f5-4a08-98b0-4b0ee6c4ded6"></a></td></tr><tr><td style="display:none">23a23589-1d03-4638-98d0-d9b73c31e925</td><td>1120-1299</td><td>1269</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="23a23589-1d03-4638-98d0-d9b73c31e925"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="23a23589-1d03-4638-98d0-d9b73c31e925"></a></td></tr><tr role="row"><td style="display:none">76e346e3-1d5f-4fb6-a9d2-2237950c6db6</td><td>1120-1299</td><td>1299</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="76e346e3-1d5f-4fb6-a9d2-2237950c6db6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="76e346e3-1d5f-4fb6-a9d2-2237950c6db6"></a></td></tr><tr role="row"><td style="display:none">2cf47393-d095-4b8d-a651-a9a77cd9c0d5</td><td>1700-1799</td><td>1701</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2cf47393-d095-4b8d-a651-a9a77cd9c0d5"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2cf47393-d095-4b8d-a651-a9a77cd9c0d5"></a></td></tr><tr role="row"><td style="display:none">b05b62dc-394d-4a1c-a981-7c0e63edc68b</td><td>1700-1799</td><td>1702</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b05b62dc-394d-4a1c-a981-7c0e63edc68b"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b05b62dc-394d-4a1c-a981-7c0e63edc68b"></a></td></tr><tr role="row"><td style="display:none">e18386ec-decb-4b73-aa39-a0fcacb732c6</td><td>1700-1799</td><td>1703</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e18386ec-decb-4b73-aa39-a0fcacb732c6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e18386ec-decb-4b73-aa39-a0fcacb732c6"></a></td></tr><tr role="row"><td style="display:none">ab98c107-fd91-4b90-9f86-12346a58b332</td><td>1700-1799</td><td>1719</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="ab98c107-fd91-4b90-9f86-12346a58b332"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="ab98c107-fd91-4b90-9f86-12346a58b332"></a></td></tr><tr role="row"><td style="display:none">87dc5a61-b5b0-493e-ae61-905a56f7aafe</td><td>1700-1799</td><td>1721</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="87dc5a61-b5b0-493e-ae61-905a56f7aafe"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="87dc5a61-b5b0-493e-ae61-905a56f7aafe"></a></td></tr><tr role="row"><td style="display:none">a03b8d5e-f615-417d-a33c-5d119e645a24</td><td>1700-1799</td><td>1722</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="a03b8d5e-f615-417d-a33c-5d119e645a24"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="a03b8d5e-f615-417d-a33c-5d119e645a24"></a></td></tr><tr role="row"><td style="display:none">35d06a18-5f24-4579-a704-37fd5141c6d3</td><td>1700-1799</td><td>1723</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="35d06a18-5f24-4579-a704-37fd5141c6d3"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="35d06a18-5f24-4579-a704-37fd5141c6d3"></a></td></tr><tr role="row"><td style="display:none">f8eda008-2378-4178-82f4-26a6bcf0f954</td><td>1700-1799</td><td>1724</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="f8eda008-2378-4178-82f4-26a6bcf0f954"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="f8eda008-2378-4178-82f4-26a6bcf0f954"></a></td></tr><tr role="row"><td style="display:none">e8aaf351-2352-46e9-a0ba-fb14c72a3b8e</td><td>1700-1799</td><td>1725</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e8aaf351-2352-46e9-a0ba-fb14c72a3b8e"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e8aaf351-2352-46e9-a0ba-fb14c72a3b8e"></a></td></tr><tr role="row"><td style="display:none">5c2fb70d-9de8-424b-870e-cf102033f554</td><td>1700-1799</td><td>1726</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="5c2fb70d-9de8-424b-870e-cf102033f554"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="5c2fb70d-9de8-424b-870e-cf102033f554"></a></td></tr><tr role="row"><td style="display:none">fa52ff90-804a-46dd-a3f3-8e7facd0fae5</td><td>1700-1799</td><td>1729</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="fa52ff90-804a-46dd-a3f3-8e7facd0fae5"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="fa52ff90-804a-46dd-a3f3-8e7facd0fae5"></a></td></tr><tr role="row"><td style="display:none">7d83729f-a797-4963-a640-1831954a12d6</td><td>1700-1799</td><td>1741</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="7d83729f-a797-4963-a640-1831954a12d6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="7d83729f-a797-4963-a640-1831954a12d6"></a></td></tr><tr role="row"><td style="display:none">78f38202-019a-4d21-b9b0-f28fa87f35e1</td><td>1700-1799</td><td>1742</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="78f38202-019a-4d21-b9b0-f28fa87f35e1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="78f38202-019a-4d21-b9b0-f28fa87f35e1"></a></td></tr><tr role="row"><td style="display:none">03445dee-288f-414e-ae48-d130556ca158</td><td>1700-1799</td><td>1743</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="03445dee-288f-414e-ae48-d130556ca158"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="03445dee-288f-414e-ae48-d130556ca158"></a></td></tr><tr role="row"><td style="display:none">5335cc21-bc92-487c-82a8-569b7e3a7be3</td><td>1700-1799</td><td>1744</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="5335cc21-bc92-487c-82a8-569b7e3a7be3"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="5335cc21-bc92-487c-82a8-569b7e3a7be3"></a></td></tr><tr role="row"><td style="display:none">9342f0a0-dfac-47dd-97a2-8bed9855f3a4</td><td>1700-1799</td><td>1745</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="9342f0a0-dfac-47dd-97a2-8bed9855f3a4"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="9342f0a0-dfac-47dd-97a2-8bed9855f3a4"></a></td></tr><tr role="row"><td style="display:none">a538ccae-e0e9-41b4-989f-6366590a138b</td><td>1700-1799</td><td>1746</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="a538ccae-e0e9-41b4-989f-6366590a138b"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="a538ccae-e0e9-41b4-989f-6366590a138b"></a></td></tr><tr role="row"><td style="display:none">61a00545-49b5-4cfe-9696-433f8986414b</td><td>1700-1799</td><td>1749</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="61a00545-49b5-4cfe-9696-433f8986414b"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="61a00545-49b5-4cfe-9696-433f8986414b"></a></td></tr><tr role="row"><td style="display:none">a2f4c796-99da-4e69-97a1-bfa4a0f8bb85</td><td>1700-1799</td><td>1751</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="a2f4c796-99da-4e69-97a1-bfa4a0f8bb85"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="a2f4c796-99da-4e69-97a1-bfa4a0f8bb85"></a></td></tr><tr role="row"><td style="display:none">02b9656f-f38a-4d78-a19e-68c9b07a1547</td><td>1700-1799</td><td>1752</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="02b9656f-f38a-4d78-a19e-68c9b07a1547"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="02b9656f-f38a-4d78-a19e-68c9b07a1547"></a></td></tr><tr role="row"><td style="display:none">bd8c81af-29f0-4fed-b94c-32f52751f685</td><td>1700-1799</td><td>1753</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="bd8c81af-29f0-4fed-b94c-32f52751f685"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="bd8c81af-29f0-4fed-b94c-32f52751f685"></a></td></tr><tr role="row"><td style="display:none">b22b2e55-72c0-43cd-8e6f-302a8ad051c3</td><td>1700-1799</td><td>1755</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b22b2e55-72c0-43cd-8e6f-302a8ad051c3"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b22b2e55-72c0-43cd-8e6f-302a8ad051c3"></a></td></tr><tr role="row"><td style="display:none">074cd6c2-33a6-4a45-ba53-791d65f00558</td><td>1700-1799</td><td>1756</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="074cd6c2-33a6-4a45-ba53-791d65f00558"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="074cd6c2-33a6-4a45-ba53-791d65f00558"></a></td></tr><tr role="row"><td style="display:none">7de8fbe6-fef5-4499-b42e-c0c22a32ee34</td><td>1700-1799</td><td>1757</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="7de8fbe6-fef5-4499-b42e-c0c22a32ee34"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="7de8fbe6-fef5-4499-b42e-c0c22a32ee34"></a></td></tr><tr role="row"><td style="display:none">6a4d2fbc-7964-402f-ad19-bde46c1c9db1</td><td>1700-1799</td><td>1758</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="6a4d2fbc-7964-402f-ad19-bde46c1c9db1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="6a4d2fbc-7964-402f-ad19-bde46c1c9db1"></a></td></tr><tr role="row"><td style="display:none">5183fa7e-9c65-4832-8265-ef0c219f8a1c</td><td>1700-1799</td><td>1759</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="5183fa7e-9c65-4832-8265-ef0c219f8a1c"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="5183fa7e-9c65-4832-8265-ef0c219f8a1c"></a></td></tr><tr role="row"><td style="display:none">09f8ea60-035a-4837-a668-3c0549e1a83c</td><td>1700-1799</td><td>1761</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="09f8ea60-035a-4837-a668-3c0549e1a83c"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="09f8ea60-035a-4837-a668-3c0549e1a83c"></a></td></tr><tr role="row"><td style="display:none">c343d259-a8e5-4a26-994c-1aac2d6a7402</td><td>1700-1799</td><td>1762</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="c343d259-a8e5-4a26-994c-1aac2d6a7402"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="c343d259-a8e5-4a26-994c-1aac2d6a7402"></a></td></tr><tr role="row"><td style="display:none">e707e285-5609-4b58-9476-1366c3533400</td><td>1700-1799</td><td>1763</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e707e285-5609-4b58-9476-1366c3533400"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e707e285-5609-4b58-9476-1366c3533400"></a></td></tr><tr role="row"><td style="display:none">e7d46af5-18e4-4344-b077-ee37b196fad3</td><td>1700-1799</td><td>1764</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="e7d46af5-18e4-4344-b077-ee37b196fad3"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="e7d46af5-18e4-4344-b077-ee37b196fad3"></a></td></tr><tr role="row"><td style="display:none">4c13c940-dfa5-450b-82ad-8e8b7f2b32bd</td><td>1700-1799</td><td>1765</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="4c13c940-dfa5-450b-82ad-8e8b7f2b32bd"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="4c13c940-dfa5-450b-82ad-8e8b7f2b32bd"></a></td></tr><tr role="row"><td style="display:none">32dfaefe-4012-42f1-a4f3-bdde983a8ba1</td><td>1700-1799</td><td>1767</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="32dfaefe-4012-42f1-a4f3-bdde983a8ba1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="32dfaefe-4012-42f1-a4f3-bdde983a8ba1"></a></td></tr><tr role="row"><td style="display:none">2d7354b8-086a-4332-a2c4-27760c3f5af1</td><td>1700-1799</td><td>1768</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2d7354b8-086a-4332-a2c4-27760c3f5af1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2d7354b8-086a-4332-a2c4-27760c3f5af1"></a></td></tr><tr role="row"><td style="display:none">48ee3e5d-eae5-46f5-b69a-1f368b1e0239</td><td>1700-1799</td><td>1769</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="48ee3e5d-eae5-46f5-b69a-1f368b1e0239"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="48ee3e5d-eae5-46f5-b69a-1f368b1e0239"></a></td></tr><tr role="row"><td style="display:none">2b4f793e-b0ea-455a-a4e2-bd4b381e92f6</td><td>1700-1799</td><td>1771</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="2b4f793e-b0ea-455a-a4e2-bd4b381e92f6"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="2b4f793e-b0ea-455a-a4e2-bd4b381e92f6"></a></td></tr><tr role="row"><td style="display:none">12b10a75-d390-413c-bfd6-cc4bcfc5e29a</td><td>1700-1799</td><td>1772</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="12b10a75-d390-413c-bfd6-cc4bcfc5e29a"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="12b10a75-d390-413c-bfd6-cc4bcfc5e29a"></a></td></tr><tr role="row"><td style="display:none">31d81783-8c3b-49a6-81aa-c3153aa74ff3</td><td>1700-1799</td><td>1773</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="31d81783-8c3b-49a6-81aa-c3153aa74ff3"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="31d81783-8c3b-49a6-81aa-c3153aa74ff3"></a></td></tr><tr role="row"><td style="display:none">d4cd10e2-f1d6-4005-9fee-a00d3b8f7300</td><td>1700-1799</td><td>1774</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="d4cd10e2-f1d6-4005-9fee-a00d3b8f7300"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="d4cd10e2-f1d6-4005-9fee-a00d3b8f7300"></a></td></tr><tr role="row"><td style="display:none">29e9bd81-910e-4ec4-a2c6-a6add5654493</td><td>1700-1799</td><td>1775</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="29e9bd81-910e-4ec4-a2c6-a6add5654493"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="29e9bd81-910e-4ec4-a2c6-a6add5654493"></a></td></tr><tr role="row"><td style="display:none">15a48ba1-0ca2-450f-a336-a7fbe310065c</td><td>1700-1799</td><td>1778</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="15a48ba1-0ca2-450f-a336-a7fbe310065c"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="15a48ba1-0ca2-450f-a336-a7fbe310065c"></a></td></tr><tr role="row"><td style="display:none">b43c7cba-9e55-4e0d-ad7b-d28e95c82d8e</td><td>1700-1799</td><td>1779</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b43c7cba-9e55-4e0d-ad7b-d28e95c82d8e"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b43c7cba-9e55-4e0d-ad7b-d28e95c82d8e"></a></td></tr><tr role="row"><td style="display:none">1d92f03b-ec66-4b1f-ae78-d871fd9f91d1</td><td>1700-1799</td><td>1776</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="1d92f03b-ec66-4b1f-ae78-d871fd9f91d1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="1d92f03b-ec66-4b1f-ae78-d871fd9f91d1"></a></td></tr><tr role="row"><td style="display:none">b9c3fb61-5d40-4e8e-b3c2-65bad11e89f1</td><td>1700-1799</td><td>1781</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="b9c3fb61-5d40-4e8e-b3c2-65bad11e89f1"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="b9c3fb61-5d40-4e8e-b3c2-65bad11e89f1"></a></td></tr><tr role="row"><td style="display:none">394d3954-d07d-46c0-9a6c-fa5cbf8ff5fb</td><td>1700-1799</td><td>1782</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="394d3954-d07d-46c0-9a6c-fa5cbf8ff5fb"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="394d3954-d07d-46c0-9a6c-fa5cbf8ff5fb"></a></td></tr><tr role="row"><td style="display:none">3c836def-43d9-4bcf-9056-750f8a403d16</td><td>1700-1799</td><td>1789</td><td>0</td><td>0</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editorderid="3c836def-43d9-4bcf-9056-750f8a403d16"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delorderid="3c836def-43d9-4bcf-9056-750f8a403d16"></a></td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="btn btn-danger">አስቀምጥ ከማለቶ በፊት ቀን መምረጥ እንዳይረሱ</span>
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">ዝጋ</button>
+                    <button type="submit" class="btn btn-success" data-dismiss="modal" id="saveOrder">አስቀምጥ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/css/themes.css" rel="stylesheet" />
+<link href="~/css/theme.default.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/js/datatable.js"></script>
+    <script src="~/js/input.js"></script>
+    <script src="~/js/mains.js"></script>
+    <script src="~/js/jquery.plugin.js"></script>
+    <script src="~/js/jquery.calendars.js"></script>
+    <script src="~/js/jquery.calendars.plus.js"></script>
+    <script src="~/js/jquery.calendars.picker.js"></script>
+    <script src="~/js/jquery.calendars.ethiopian.js"></script>
+    <script src="~/js/jquery.calendars.ethiopian-am.js"></script>
+    <script type="text/javascript" src="~/js/jquery.calendars.picker-am.js"></script>
+    <script src="~/js/jqueryuinew.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <script src="~/Scripts/jquery.quicksearch.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.widgets.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //var calendar = $.calendars.instance('ethiopian', 'am');
+            //$("#popupDatepicker").calendarsPicker({ calendar: calendar });
+            $("#accordion")
+                .accordion({
+                    collapsible: true,
+                    header: "> div > h6"
+                })
+                .sortable({
+                    axis: "y",
+                    handle: "h6",
+                    stop: function (event, ui) {
+                        // IE doesn't register the blur when sorting
+                        // so trigger focusout handlers to remove .ui-state-focus
+                        ui.item.children("h6").triggerHandler("focusout");
+
+                        // Refresh accordion to handle new order
+                        $(this).accordion("refresh");
+                    }
+                });
+        });
+        var tableRowIndex = -1;
+        var editMode;
+
+        function tableSort() {
+            $("#detailsTable").tablesorter({ sortList: [[0, 0], [1, 0]] });
+            $('input#id_search').quicksearch('table#detailsTable tbody tr');
+        };
+        function addNewOrder() {
+            tableSort();
+            LoadParents($('#name'));
+            LoadChildren($('#address'));
+            LoadFisicalYears($('#fisicalyearid'));
+            LoadRevenueCategories($('.revenueCategoryId'));
+
+            LoadChartOfAccounts($('#ChartOfAccountId'));
+
+            clearItem();
+            $("#detailsTable tbody tr").remove();
+            $("#newOrderModal").modal();
+            $("#amountyplan").val(0.00);
+            $("#amountyperformance").val(0.00);
+
+        };
+        $("#RevenueCategoryId").change(function () {
+            $.get("/Orders/GetChartOfAccountList", { RevenueCategoryId: $("#RevenueCategoryId").val() }, function (data) {
+                $("#ChartOfAccountId").empty();
+                $.each(data, function (index, row) {
+                    $("#ChartOfAccountId").append("<option value='" + row.ChartOfAccountId + "'>" + row.ChartOfAccountName + "</option>")
+                });
+            });
+        })
+        $("#name").change(function () {
+            $.get("/Orders/GetChildList", { ParentId: $("#name").val() }, function (data) {
+                $("#address").empty();
+                $.each(data, function (index, row) {
+                    $("#address").append("<option value='" + row.ChildId + "'>" + row.ChildName + "</option>")
+                });
+            });
+        })
+        //----------------------------------------------------------------Parents
+        var Parents = []
+        //fetch from database
+        function LoadParents(element) {
+            if (Parents.length == 0) {
+                //ajax function for fetch data
+                $.ajax({
+                    type: "GET",
+                    url: '/Orders/LoadParents',
+                    success: function (data) {
+                        Parents = data;
+                        //render
+                        renderParents(element);
+                    }
+                })
+            }
+            else {
+                //render to the element
+                renderParents(element);
+            }
+        }
+        function renderParents(element) {
+            var $ele = $(element);
+            $ele.empty();
+            $ele.append($('<option/>').val('0').text('--ይምረጡ--'));
+            $.each(Parents, function (index, item) {
+                $ele.append($('<option/>').val(item.value).text(item.text));
+            })
+        }
+        //-----------------------------------------------Children
+        var Children = []
+        //fetch from database
+        function LoadChildren(element) {
+            if (Children.length == 0) {
+                //ajax function for fetch data
+                $.ajax({
+                    type: "GET",
+                    url: '/Orders/LoadChildren',
+                    success: function (data) {
+                        Children = data;
+                        //render
+                        renderChildren(element);
+                    }
+                })
+            }
+            else {
+                //render to the element
+                renderChildren(element);
+            }
+        }
+        function renderChildren(element) {
+            var $ele = $(element);
+            $ele.empty();
+            $ele.append($('<option/>').val('0').text('--ይምረጡ--'));
+            $.each(Children, function (index, item) {
+                $ele.append($('<option/>').val(item.value).text(item.text));
+            })
+        }
+        //-----------------------------------------------FisicalYear
+
+        //fetch from database
+        var FisicalYears = []
+        //fetch from database
+        function LoadFisicalYears(element) {
+            if (FisicalYears.length == 0) {
+                //ajax function for fetch data
+                $.ajax({
+                    type: "GET",
+                    url: '/Orders/LoadFisicalYears',
+                    success: function (data) {
+                        FisicalYears = data;
+                        //render
+                        renderFisicalYears(element);
+                    }
+                })
+            }
+            else {
+                //render to the element
+                renderFisicalYears(element);
+            }
+        }
+        function renderFisicalYears(element) {
+            var $ele = $(element);
+            $ele.empty();
+            $ele.append($('<option/>').val('0').text('--ይምረጡ--'));
+            $.each(FisicalYears, function (index, item) {
+                $ele.append($('<option/>').val(item.value).text(item.text));
+            })
+        }
+
+        //-----------------------------------------------RevenueCategories
+        var RevenueCategories = []
+        //fetch from database
+        function LoadRevenueCategories(element) {
+            if (RevenueCategories.length == 0) {
+                //ajax function for fetch data
+                $.ajax({
+                    type: "GET",
+                    url: '/Orders/LoadRevenueCategories',
+                    success: function (data) {
+                        RevenueCategories = data;
+                        //render
+                        renderRevenueCategories(element);
+                    }
+                })
+            }
+            else {
+                //render to the element
+                renderRevenueCategories(element);
+            }
+        }
+        function renderRevenueCategories(element) {
+            var $ele = $(element);
+            $ele.empty();
+            $ele.append($('<option/>').val('0').text('--ይምረጡ--'));
+            $.each(RevenueCategories, function (index, item) {
+                $ele.append($('<option/>').val(item.value).text(item.text));
+            })
+        }
+
+        //-----------------------------------------------ChartOfAccounts
+        var ChartOfAccounts = []
+        //fetch from database
+        function LoadChartOfAccounts(element) {
+            if (ChartOfAccounts.length == 0) {
+                //ajax function for fetch data
+                $.ajax({
+                    type: "GET",
+                    url: '/Orders/LoadChartOfAccounts',
+                    success: function (data) {
+                        ChartOfAccounts = data;
+                        //render
+                        renderChartOfAccounts(element);
+                    }
+                })
+            }
+            else {
+                //render to the element
+                renderChartOfAccounts(element);
+            }
+        }
+        function renderChartOfAccounts(element) {
+            var $ele = $(element);
+            $ele.empty();
+            $ele.append($('<option/>').val('0').text('--ይምረጡ--'));
+            $.each(ChartOfAccounts, function (index, item) {
+                $ele.append($('<option/>').val(item.value).text(item.text));
+            })
+        }
+
+        $(function () {
+            $("#popupDatepicker").datepicker();
+        });
+
+
+        ///////////////////////////////
+        $("#addToList").click(function (e) {
+            e.preventDefault();
+            editMode = false;
+
+            if ($.trim($("#RevenueCategoryId").val()) == "" ||
+                $.trim($("#ChartOfAccountId").val()) == "" ||
+                $.trim($("#amountyplan").val()) == "" ||
+                $.trim($("#amountyperformance").val()) == "") return;
+
+            var RevenueCategoryId = $("#RevenueCategoryId").val(),
+                ChartOfAccountId = $("#ChartOfAccountId").val(),
+                amountyplan = $("#amountyplan").val(),
+                amountyperformance = $("#amountyperformance").val(),
+                detailsTableBody = $("#detailsTable tbody");
+            var productItem = '<tr><td style="display:none"></td><td>' +
+                RevenueCategoryId +
+                '</td><td>' +
+                ChartOfAccountId +
+                '</td><td>' +
+                amountyplan +
+                '</td><td>' +
+                amountyperformance +
+
+                '</td><td><a data-itemId="0" href="#" class="deleteItem" style="color:Blue">Remove</a></tr>';
+            detailsTableBody.append(productItem);
+
+
+            clearItem();
+        });
+
+        // Clear Item
+        function clearItem() {
+            $("#RevenueCategoryId").val('');
+            $("#ChartOfAccountId").val('');
+            $("#amountyplan").val('');
+            $("#amountyperformance").val('');
+            $("#rowIndex").val('')
+        }
+
+        $(document).on('click', 'a.deleteItem', function (e) {
+            e.preventDefault();
+            var $self = $(this);
+            if ($(this).attr('data-itemId') == "0") {
+                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        // Save Order //
+        function saveOrder(data) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Orders/SaveOrder',
+                data: data,
+                success: function (result) {
+                    $("#newOrderModal").hide();
+                    location.reload();
+                    alert(result);
+                },
+                error: function (result) {
+                    alert("እባኮን የተሟላ ምዝገባ ያድርጉ..!!!");
+                }
+            });
+        }
+
+        // When Clicking the save button //
+        $("#saveOrder").click(function (e) {
+            e.preventDefault();
+
+            var orderArr = [];
+            orderArr.length = 0;
+
+            $.each($("#detailsTable tbody tr"),
+                function () {
+                    orderArr.push({
+                        orderId: $(this).find('td:eq(0)').html(),
+                        RevenueCategoryId: $(this).find('td:eq(1)').html(),
+                        ChartOfAccountId: $(this).find('td:eq(2)').html(),
+                        amountyplan: $(this).find('td:eq(3)').html(),
+                        amountyperformance: $(this).find('td:eq(4)').html()
+
+                    });
+                })
+
+            var data = JSON.stringify({ // to convert the object to JSON format
+                id: $("#CustomerId").val() == "" ? "" : $("#CustomerId").val(),
+                parentid: $("#name").val(),
+                childid: $("#address").val(),
+                fisicalyearid: $("#fisicalyearid").val(),
+                orderdate: $("#popupDatepicker").val(),
+                orders: orderArr
+            });
+
+            console.log(data);
+
+            $.when(saveOrder(data)).then(function (respose) {
+                console.log(respose);
+            }).fail(function (err) {
+                console.log(err);
+            })
+        })
+
+        //----------- Edit Part ------------//
+        // Loading data from the server to edit
+
+        $(".btnEdit").click(function (e) {
+            editMode = true;
+            LoadParents($('#name'));
+            LoadChildren($('#address'));
+
+            LoadFisicalYears($('#fisicalyearid'));
+
+            LoadRevenueCategories($('.revenueCategoryId'));
+
+
+            LoadChartOfAccounts($('#ChartOfAccountId'));
+
+
+            $("#addToList").removeAttr('style', 'display:none');
+            $("#updateList").attr('style', 'display:none');
+
+            $("#name").val('');
+            $("#address").val('');
+            $("#fisicalyearid").val('');
+            $("#popupDatepicker").val('');
+            clearItem();
+            $("#detailsTable tbody tr").remove(); // Remove all table row
+
+            e.preventDefault(); // Edit Default Action
+
+            var $btnEdit = $(this);
+            // Customer Id
+            var customerId = $btnEdit.attr("data-val-customerId").toString();
+            console.log(customerId.toString());
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { customerId: $btnEdit.attr("data-val-customerId").toString() },
+                url: '/Orders/GetOrderDetails/' + customerId,
+                success: function (result) {
+                    var NewDate = result.Customer.OrderDate;
+                    var nowDate = new Date(parseInt(NewDate.substr(6)))
+                    console.log(result);
+                    //alert(result);
+                    //location.reload();
+                    console.log(result.Customer);
+                    //CustomerId,Address,Name
+                    $("#CustomerId").val(result.Customer.CustomerId);
+                    $("#address").val(result.Customer.ChildId);
+                    $("#name").val(result.Customer.ParentId);
+                    $("#fisicalyearid").val(result.Customer.FisicalYearId);
+                    $("#popupDatepicker").val(nowDate.toLocaleDateString());
+
+
+                    //console.log($("#CustomerId").val());
+                    var detailsTableBody = $("#detailsTable tbody");
+                    $.each(result.Orders,
+                        function (index, item) {
+                            var productItem = '<tr><td style="display:none">' +
+                                item.OrderId +
+                                '</td><td>' +
+                                item.RevenueCategoryId +
+                                '</td><td>' +
+                                item.ChartOfAccountId +
+                                '</td><td>' +
+                                item.Amountyplan +
+                                '</td><td>' +
+                                item.Amountyperformance +
+                                '</td><td><a href="#" class="btn btn-primary btn-sm bi bi-pencil orderEdit" data-val-editOrderId="' +
+                                item.OrderId +
+                                '"></a> <a href="#" class="btn btn-danger btn-sm bi bi-trash orderDelete" tooltip="Delete" data-val-delOrderId="' +
+                                item.OrderId +
+                                '"></a></td></tr>';
+                            //console.log(item.OrderId);
+                            detailsTableBody.append(productItem);
+                        })
+                    $("#newOrderModal").modal();
+                    tableSort();
+                },
+                error: function (result) {
+                    alert("እባክዎን የተሟላ ምዝገባ ያድርጉ!!!");
+                }
+            })
+        })
+
+        // Click Edit icon  on the modal view//
+        $(document).on("click", "a.orderEdit", function (e) {
+            // Hiding the button
+            //addToList
+            //updateList
+            $("#addToList").attr('style', 'display:none');
+            $("#updateList").removeAttr('style', 'display:none');
+            tableRowIndex = -1; // intializing it to default value.
+            e.preventDefault();
+            $("#OrderId").val();
+            clearItem();
+
+            tableRowIndex = $(this).parent().parents('tr').index(); // find table row
+            var orderId = $(this).parents('tr').find('td:eq(0)').html();
+            $("#RevenueCategoryId").val($(this).parents('tr').find('td:eq(1)').html());
+            $("#ChartOfAccountId").val($(this).parents('tr').find('td:eq(2)').html());
+            $("#amountyplan").val($(this).parents('tr').find('td:eq(3)').html());
+            $("#amountyperformance").val($(this).parents('tr').find('td:eq(4)').html());
+            console.log("Order Id: " + orderId);
+            $("#OrderId").val(orderId);
+        })
+
+        // table row data update //
+        $("#updateList").click(function (e) {
+            //alert("Row Index- " + tableRowIndex);
+            var tableRow = $("#detailsTable tbody").find("tr:eq('" + tableRowIndex + "')");
+            tableRow.find('td:eq(1)').html($("#RevenueCategoryId").val());
+            tableRow.find('td:eq(2)').html($("#ChartOfAccountId").val());
+            tableRow.find('td:eq(3)').html($("#amountyplan").val());
+            tableRow.find('td:eq(4)').html($("#amountyperformance").val());
+            //tableRow.find('td:eq(5)').html(parseFloat($("#price").val()) * parseInt($("#quantity").val()));
+            $("#OrderId").val('');
+            tableRowIndex = -1;
+            $("#addToList").removeAttr('style', 'display:none');
+            $("#updateList").attr('style', 'display:none');
+            clearItem();
+        })
+
+        // Delete an Order
+        function deleteAnOrder(orderId, orderItemRow) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Orders/DeleteAnOrder',
+                data: JSON.stringify({ orderId: orderId }),
+                success: function (result) {
+                    alert(result);
+                    console.log(result);
+                    $("#detailsTable tbody").find('tr:eq("' + orderItemRow + '")').css("background-color", "#ff6347")
+                        .fadeOut(800,
+                            function () {
+                                $("#detailsTable tbody").find('tr:eq("' + orderItemRow + '")').remove();
+                            });
+                },
+                error: function (result) {
+                    //alert("Something is went worng..!!!");
+                    alert(result);
+                }
+            });
+        }
+
+        $(document).on("click", "a.orderDelete", function () {
+            var $self = $(this);
+            var orderId = $self.parents('tr').find('td:eq(0)').html();
+            var orderItemRow = $self.parents('tr').index();
+            //alert(orderItemRow);
+
+            if (confirm("እርግጠኛ ማጥፋት ይፈልጋሉ? " + $self.parents('tr').find('td:eq(1)').html())) {
+                $.when(deleteAnOrder(orderId, orderItemRow)).then(function (response) {
+                    console.log(response);
+                }).fail(function (err) {
+                    console.log(err);
+                })
+            }
+        })
+
+        $('#newOrderModal').on('hidden.bs.modal', function () {
+            if (editMode == true) {
+                location.reload();
+            }
+        })
+
+        $(document).on("click", ".deleteCustomer", function () {
+            var customerId = $(this).attr("data-val-customerId");
+            // var customerName = $(this).parents('tr').find('td:eq(0)').html();
+
+            //alert(customerId);
+            if (confirm("እርግጠኛ ማጥፋት ይፈልጋሉ?" + '')) {
+                $.when(delereCustomer(customerId)).then(function (response) {
+                    console.log(response);
+                }).fail(function (err) {
+                    console.log(err);
+                })
+            }
+        });
+
+        function delereCustomer(customerId) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Orders/DeleteCustomer',
+                data: JSON.stringify({ customerId: customerId }),
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function (result) {
+                    //alert("Something is went worng..!!!");
+                    alert(result);
+                }
+            })
+        }
+
+    </script>
+}
+
+<style>
+    .ui-accordion .ui-accordion-header {
+        /* display: block; */
+        cursor: pointer;
+        position: relative;
+        margin: 2px 0 0 0;
+        padding: 0.5em 0.5em 0.5em 0.7em;
+        font-size: 80%;
+        background: #3c8dbc;
+        color: white;
+        width: 96%;
+    }
+</style>

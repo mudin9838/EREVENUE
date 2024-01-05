@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>@ViewBag.Title  | eRevenues System</title>
+    <link rel="stylesheet" href="~/Scripts/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="~/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    @Styles.Render("~/Adminlte/css")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bold-reports/material/bold.reports.all.min.css")
+    @Scripts.Render("~/bundles/modernizr")
+<style>
+.tidio-135wcf7 {
+    margin-right: 40px;
+    float: right;
+    display: flex;
+    text-decoration: none;
+    color: rgb(136, 148, 171);
+    font-weight: 400;
+    font-size: 10px;
+    visibility: hidden;
+    direction: ltr;
+}
+</style>
+</head>
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_NavBar")
+            @Html.Partial("_SideBar")
+
+        }
+
+        <div class="content-wrapper">
+            @RenderBody()
+
+        </div>
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <!--<div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>-->
+        </aside>
+
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <!-- Default to the left -->
+            <div class="float-right d-none d-sm-block position-fixed">
+
+            </div>
+            &copy; <span style="color: #e25555;">
+                &hearts;
+                የባለቤትነት መብት © 2022 የገቢዎች ቢሮ - መብቱ በሕግ የተጠበቀ ነው
+            </span>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/customscript")
+
+
+    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.common.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/bold.reports.widgets.min.js")
+    <!--Renders the chart item. Add this script only if your report contains the chart report item.-->
+    @Scripts.Render("~/Scripts/bold-reports/data-visualization/ej.chart.min.js")
+
+    <!-- Report Viewer component script-->
+    @Scripts.Render("~/Scripts/bold-reports/bold.report-viewer.min.js")
+    @Scripts.Render("~/Scripts/bold-reports/common/ej.unobtrusive.min.js")
+    @RenderSection("scripts", required: false)
+    @Html.Bold().ScriptManager()
+</body>
+
+
+</html>
